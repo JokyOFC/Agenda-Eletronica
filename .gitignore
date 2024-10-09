@@ -1,0 +1,39 @@
+.vscode/
+
+# Compiled object files
+*.o
+*.obj
+
+# Compiled binary files
+*.exe
+*.out
+*.app
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# IDE-specific files
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+*.idea/
+.vscode/
+*.ncb
+*.sdf
+*.suo
+*.user
+
+# Makefile artifacts
+Makefile.bak
+Makefile.dep
+
+# Logs
+*.log
+
+# Directory for build artifacts
+build/
+bin/
+obj/

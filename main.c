@@ -1,7 +1,14 @@
 #include <stdio.h>
-#include "menu.h" 
+#include "menu/menu.h" 
+#include "datasources/datasource.h"
+#include "entities/entitie.h"
 
 int main() {
-    displayMenu(); 
+    Node* contact_list = NULL;
+
+    createMockContacts(&contact_list);
+    createMockContactWithDependent(&contact_list);
+    display_menu(contact_list);
+
     return 0;
 }

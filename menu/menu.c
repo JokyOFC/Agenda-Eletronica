@@ -1,7 +1,26 @@
 #include <stdio.h>
-#include "datasource.h"
+#include "../datasources/datasource.h"
+#include "../entities/entitie.h"
 
+void display_menu(Node* head) {
+    int option;
+    do {
+        printf("------ Menu ------\n");
+        printf("1. Listar contatos\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &option);
 
-void displayMenu() {
-    
+        switch (option) {
+            case 1:
+                getContacts(head);
+                break;
+            case 0:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+                break;
+        }
+    } while (option != 0);
 }
