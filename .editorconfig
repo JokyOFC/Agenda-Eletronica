@@ -1,0 +1,28 @@
+# EditorConfig é uma ferramenta para ajudar a manter estilos de codificação consistentes
+# em diferentes editores e IDEs. Para mais informações, veja https://editorconfig.org
+
+root = true
+
+
+[*]
+indent_style = space         # Use espaços para indentação
+indent_size = 4              # Defina o tamanho da indentação como 4 espaços
+end_of_line = lf             # Use LF para nova linha
+charset = utf-8              # Use UTF-8 como codificação de caracteres
+trim_trailing_whitespace = true # Remova espaços em branco no final das linhas
+insert_final_newline = true  # Insira uma nova linha no final do arquivo
+
+[*.c]
+indent_size = 4              # 4 espaços para arquivos C
+max_line_length = 80         # Limite de 80 caracteres por linha
+
+[*.h]
+indent_size = 4              # 4 espaços para arquivos de cabeçalho C
+max_line_length = 80         # Limite de 80 caracteres por linha
+
+[*.cpp]
+indent_size = 4              # 4 espaços para arquivos C++
+max_line_length = 80         # Limite de 80 caracteres por linha
+
+[*.h]
+indent_style = space         # Use espaços para indentação

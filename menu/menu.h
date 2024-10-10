@@ -1,6 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-void displayMenu();
+#include "../entities/entitie.h"
+
+void display_menu(Node* head);
 
 #endif
