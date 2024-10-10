@@ -3,6 +3,6 @@
 
 #include "../entities/entitie.h"
 
-void display_menu(Node* head);
+void displayMenu(Node *head);
 
 #endif

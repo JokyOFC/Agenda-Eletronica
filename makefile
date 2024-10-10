@@ -2,6 +2,10 @@ CC = gcc
 CFLAGS = -Wall -g
 OBJ = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o
 
+SRC_DIRS = menu dependencies utils datasources entities
+SRC_FILES = $(wildcard $(addsuffix /*.c, $(SRC_DIRS)) main.c)
+HEADER_FILES = $(wildcard $(addsuffix /*.h, $(SRC_DIRS)) include/*.h)
+
 all: agenda
 
 agenda: $(OBJ)
@@ -21,3 +25,12 @@ utils/bubble_sort.o: utils/bubble_sort.c utils/bubble_sort.h entities/entitie.h
 
 clean:
 	rm -f *.o agenda
+
+install-dev-dependencies:
+	sudo apt-get install cppcheck clang-format
+
+lint:
+	cppcheck --enable=all $(SRC_FILES)
+
+format:
+	clang-format -i $(SRC_FILES) $(HEADER_FILES)
