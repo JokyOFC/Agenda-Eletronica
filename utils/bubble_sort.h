@@ -3,6 +3,6 @@
 
 #include "../entities/entitie.h"
 
-void bubbleSort(Node** head);
+void bubbleSort(Node **head);
 
 #endif
