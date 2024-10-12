@@ -35,7 +35,7 @@ Makefile.dep
 
 # Directory for build artifacts
 build/
-bin/
+bin/A
 obj/
 
 agenda.*
