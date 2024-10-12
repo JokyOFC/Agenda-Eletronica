@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "menu.h"
 
+int notClean = 0;
+
 void displayAsciiArt() {
     printf("      _.--._  _.--._\n");
     printf(",-=.-\":;:;:;\\':;:;:;\"-._\n");
@@ -19,11 +21,10 @@ void displayAsciiArt() {
 
 void displayMenu(Node *head) {
     char option;
-    int unclean = 0;
     do {
-        if(!unclean) {
+        if(!notClean) {
             clearScreen();
-            unclean = 0;
+            notClean = 0;
         }
         displayAsciiArt();
         printf("\n------ Menu ------\n");
@@ -40,6 +41,7 @@ void displayMenu(Node *head) {
             case '1':
                 clearScreen();
                 displayReports(head);
+                notClean = 0;
             break;
             case '2':
                 // Chamar função para remover contato
@@ -60,17 +62,19 @@ void displayMenu(Node *head) {
             default:
                 clearScreen();
                 printf("Opção inválida. Tente novamente.\n");
-                unclean = 1;
+                notClean = 1;
             break;
         }
     } while (option != '0');
 }
 
 void displayReports(Node *head) {
-
     char option;
     do {
-        clearScreen();
+        if(!notClean) {
+            clearScreen();
+            notClean = 0;
+        }
         displayAsciiArt();
         printf("\n------ Relatórios/Buscas ------\n");
         printf("1. Listar contatos\n");
@@ -82,6 +86,7 @@ void displayReports(Node *head) {
             case '1':
                 clearScreen();
                 getContacts(head);
+                notClean = 1;
             break;
             case '0':
                 return;  // Volta para o menu anterior
