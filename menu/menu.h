@@ -4,5 +4,6 @@
 #include "../entities/entitie.h"
 
 void displayMenu(Node *head);
+void displayReports(Node *head);
 
 #endif
