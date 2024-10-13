@@ -78,6 +78,7 @@ void displayReports(Node *head) {
         displayAsciiArt();
         printf("\n------ Relatórios/Buscas ------\n");
         printf("1. Listar contatos\n");
+        printf("2. Buscar contato pelo nome\n");
         printf("0. Voltar\n");
         printf("Escolha uma opção: ");
         scanf(" %c", &option);
@@ -86,6 +87,14 @@ void displayReports(Node *head) {
             case '1':
                 clearScreen();
                 getContacts(head);
+                notClean = 1;
+            break;
+            case '2':
+                clearScreen();
+                char name[45];
+                printf("Insira o nome do contato que deseja buscar:\n");
+                scanf("%44s", name);
+                getContactsByName(head, name);
                 notClean = 1;
             break;
             case '0':
