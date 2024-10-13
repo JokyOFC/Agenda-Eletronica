@@ -75,7 +75,7 @@ void getContactsByName(Node *head, char name[]) {
   printf("\n------Contato(s) com o nome: %s------\n", name);
 
   while (current !=NULL) {
-    
+
     if (strcmp(current->contact.name, name) == 0) {
       printf("ID: %s\n", current->contact.id);
       printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
