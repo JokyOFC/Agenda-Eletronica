@@ -68,7 +68,47 @@ void getContactsWhithoutDependents(Node *head) {
 
 void getContacByNeighborhood(Contact contacts[], char neighborhood[]) {}
 
-void getContactsByName(Contact contacts[], char name[]) {}
+void getContactsByName(Node *head, char name[]) {
+  Node *current = head;
+  int foundContact = 0;
+
+  printf("\n------Contato(s) com o nome: %s------\n", name);
+
+  while (current !=NULL) {
+
+    if (strcmp(current->contact.name, name) == 0) {
+      printf("ID: %s\n", current->contact.id);
+      printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
+      printf("Age: %d\n", current->contact.age);
+      printf("Tax Number: %s\n", current->contact.taxNumber);
+      printf("Neighborhood: %s\n", current->contact.neighborhood);
+      printf("Email: %s\n", current->contact.email);
+      printf("Phone: %s\n", current->contact.phone);
+
+      if (current->contact.dependents != NULL) {
+      printf("Dependentes:\n");
+      DependentNode *depCurrent = current->contact.dependents;
+      while (depCurrent != NULL) {
+        printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
+               depCurrent->dependent.age);
+        depCurrent = depCurrent->next;
+      }
+      } else {
+        printf("Nenhum dependente cadastrado.\n");
+      }
+
+      printf("----------------------------\n");
+      foundContact = 1;
+    }
+      current = current->next;
+  }
+
+  if(!foundContact) {
+    printf("\nEsse contato não existe.\n");
+    printf("----------------------------\n");
+  }
+    printf("\n");
+}
 
 void getAllDependentsByAgeAndContactName(Contact contacts[], int dependentAge,
                                          char contactName[]) {}
@@ -121,7 +161,7 @@ void createMockContacts(Node **head) {
                                     "Midtown", "alice.johnson@example.com",
                                     "71982659845"));
   insertContact(head,
-                createContact("1", "John", "Doe", 35, "12345678901", "Downtown",
+                createContact("1", "Alice", "Doe", 35, "12345678901", "Downtown",
                               "john.doe@example.com", "71982659845"));
   insertContact(head,
                 createContact("2", "Jane", "Smith", 28, "98765432100", "Uptown",

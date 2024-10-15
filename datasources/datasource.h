@@ -11,7 +11,7 @@ void insert_contact(Node **head, Node *new_contact);
 void getContacts(Node *head);
 void getContactsWhithoutDependents(Node *head);
 void getContacByNeighborhood(Contact contacts[], char neighborhood[]);
-void getContactsByName(Contact contacts[], char name[]);
+void getContactsByName(Node *head, char name[]);
 void getAllDependentsByAgeAndContactName(Contact contacts[], int dependentAge,
                                          char contactName[]);
 
