@@ -66,7 +66,42 @@ void getContactsWhithoutDependents(Node *head) {
   printf("\n");
 }
 
-void getContacByNeighborhood(Contact contacts[], char neighborhood[]) {}
+void getContacByNeighborhood(Node *head, char neighborhood[]) {
+  Node *current = head;
+  int foundContact = 0;
+
+  printf("\n------Contato(s) no bairro: %s------\n", neighborhood);
+
+  while (current != NULL) {
+    if (strcmp(current->contact.neighborhood, neighborhood) == 0) {
+      printf("ID: %s\n", current->contact.id);
+      printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
+      printf("Age: %d\n", current->contact.age);
+      printf("Tax Number: %s\n", current->contact.taxNumber);
+      printf("Neighborhood: %s\n", current->contact.neighborhood);
+      printf("Email: %s\n", current->contact.email);
+      printf("Phone: %s\n", current->contact.phone);
+
+      if (current->contact.dependents != NULL) {
+        printf("Dependentes:\n");
+        DependentNode *depCurrent = current->contact.dependents;
+        while (depCurrent != NULL) {
+          printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name, depCurrent->dependent.age);
+          depCurrent = depCurrent->next;
+        }
+      }
+      printf("----------------------------\n");
+      foundContact = 1;
+    }
+    current = current->next;
+  }
+
+  if (!foundContact) {
+    printf("\nNenhum contato encontrado no bairro: %s.\n", neighborhood);
+    printf("----------------------------\n");
+  }
+  printf("\n");
+}
 
 void getContactsByName(Node *head, char name[]) {
   Node *current = head;
@@ -166,6 +201,12 @@ void createMockContacts(Node **head) {
   insertContact(head,
                 createContact("2", "Jane", "Smith", 28, "98765432100", "Uptown",
                               "jane.smith@example.com", "71982659845"));
+  insertContact(head,
+                createContact("4", "Alex", "Rock", 30, "84738574938", "Midtown",
+                              "alexrock@example.com", "71935478132"));
+  insertContact(head,
+                createContact("5", "Randvi", "Crow", 30, "95423915217", "Westonty",
+                              "randvi@example.com", "71858421017"));
 }
 
 void createMockContactWithDependent(Node **head) {
