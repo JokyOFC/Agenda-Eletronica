@@ -2,6 +2,8 @@
 #include "../entities/entitie.h"
 #include "../utils/clearScreen.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "menu.h"
 
 int notClean = 0;
@@ -21,6 +23,7 @@ void displayAsciiArt() {
 
 void displayMenu(Node *head) {
     char option;
+    srand(time(NULL));
     do {
         if(!notClean) {
             clearScreen();
@@ -52,7 +55,7 @@ void displayMenu(Node *head) {
                     break;
             case '4':
                 clearScreen();
-                displayInclude(head);
+                displayInclude(&head);
                 notClean = 0;
             break;           
             case '0':
@@ -154,7 +157,7 @@ void displayRemove(Node *head) {
     } while (option != '0');
 }
 
-void displayInclude(Node *head) {
+void displayInclude(Node **head) {
     char option;
     do {
         if(!notClean) {
@@ -171,7 +174,54 @@ void displayInclude(Node *head) {
 
         switch (option) {
             case '1':
+                clearScreen();
                 // Adicionar Contato
+                printf("Insira as informações do novo contato: \n");
+                char id[10];
+                char name[50];
+                char lastName[50];
+                int age;
+                char taxNumber[14];
+                char neighborhood[50];
+                char email[100];
+                char phone[20];
+                printf("Nome: ");
+                scanf("%49s", name);
+                printf("Sobrenome: ");
+                scanf("%49s", lastName);
+                printf("Idade: ");
+                scanf("%d", &age);
+                printf("RG/CPF: ");
+                scanf("%13s", taxNumber);
+                printf("Bairro: ");
+                scanf("%49s", neighborhood);
+                printf("Email: ");
+                scanf("%99s", email);
+                printf("Telefone: ");
+                scanf("%19s", phone);
+
+                int haveDependents = 0;
+                char nameDependent[50];
+                int ageDependent = 0;
+                //gera um número aleatório entre 1 e 1000 para colocar no id
+                snprintf(id, sizeof(id), "%03d", rand() % 1000); 
+                clearScreen();
+                Node *newContact = createContact(id, name, lastName, age, taxNumber, neighborhood, email, phone);
+                printf("Possui dependentes? \n 1-SIM \n 0-NAO\n");
+
+                scanf("%d", &haveDependents);
+                
+                if(haveDependents == 1) {
+                    printf("Insira os dados do dependente:\n");
+                    printf("Nome: ");
+                    scanf("%49s", nameDependent);
+                    printf("Idade: ");
+                    scanf("%d", &ageDependent);
+                    addDependent(&newContact->contact, nameDependent, ageDependent);
+                }
+
+                insertContact(head, newContact);
+                notClean = 1;
                     break;
             case '2':
                 // Adicionar Dependente
@@ -179,7 +229,6 @@ void displayInclude(Node *head) {
             case '0':
                 return;
             default:
-                clearScreen();
                 printf("Opção inválida. Tente novamente.\n");
             break;
         }
