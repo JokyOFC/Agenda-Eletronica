@@ -95,7 +95,7 @@ void displayReports(Node *head) {
                 // Chamar função para Listar Contatos de um Bairro Específico
                 clearScreen();
                 char neighborhood[45];
-                printf("Insira o Bairro Que Deseja Buscar:\n");
+                printf("Insira o bairro que deseja buscar:\n");
                 scanf("%45s", neighborhood);
                 getContacByNeighborhood(head, neighborhood);
                 notClean = 1;
