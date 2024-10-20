@@ -54,7 +54,7 @@ void displayMenu(Node *head) {
                 clearScreen();
                 displayInclude(head);
                 notClean = 0;
-            break;           
+            break;
             case '0':
                 clearScreen();
                 printf("Saindo...\n");
@@ -91,12 +91,12 @@ void displayReports(Node *head) {
                 getContacts(head);
                 notClean = 1;
             break;
-            case '2':                
+            case '2':
                 // Chamar função para Buscar Contatos de um Bairro em Específico
                 clearScreen();
                 char neighborhood[45];
                 printf("Insira o bairro que deseja buscar:\n");
-                scanf("%45s", neighborhood);
+                scanf("%44s", neighborhood);
                 getContacByNeighborhood(head, neighborhood);
                 notClean = 1;
             break;
@@ -107,7 +107,7 @@ void displayReports(Node *head) {
                 printf("Insira o nome do contato que deseja buscar:\n");
                 scanf("%44s", name);
                 getContactsByName(head, name);
-                notClean = 1;                    
+                notClean = 1;
             break;
             case '4':
                 // Chamar função para Listar Dependentes Menores de 18 Anos
@@ -143,7 +143,7 @@ void displayRemove(Node *head) {
                     break;
             case '2':
                 // Remover Dependente
-                    break;            
+                    break;
             case '0':
                 return;
             default:
@@ -175,7 +175,7 @@ void displayInclude(Node *head) {
                     break;
             case '2':
                 // Adicionar Dependente
-                    break;            
+                    break;
             case '0':
                 return;
             default:
