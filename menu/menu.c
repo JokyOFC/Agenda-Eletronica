@@ -92,7 +92,7 @@ void displayReports(Node *head) {
                 notClean = 1;
             break;
             case '2':                
-                // Chamar função para Listar Contatos de um Bairro Específico
+                // Chamar função para Buscar Contatos de um Bairro em Específico
                 clearScreen();
                 char neighborhood[45];
                 printf("Insira o bairro que deseja buscar:\n");
