@@ -22,12 +22,18 @@ char *stringCreateInput() {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
-    // Capturar o bairro
-    if (fgets(dynamicStringInput, bufferSize, stdin)) {
-        // Remover o '\n' do final, se existir
-        length = strlen(dynamicStringInput);
-        if (dynamicStringInput[length - 1] == '\n') {
-            dynamicStringInput[length - 1] = '\0';
+    // Lê os caracteres até encontrar um ENTER - Final da nossa string
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        dynamicStringInput[length++] = ch;
+
+        // Se o tamanho atual atingir o tamanho do buffer, realocar
+        if (length >= bufferSize) {
+            bufferSize *= 2;  // Duplicar o tamanho do buffer
+            dynamicStringInput = realloc(dynamicStringInput, bufferSize * sizeof(char));
+            if (dynamicStringInput == NULL) {
+                printf("Erro de alocação de memória!\n");
+                return NULL;
+            }
         }
     }
 
