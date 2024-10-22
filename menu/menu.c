@@ -1,8 +1,10 @@
 #include "../datasources/datasource.h"
 #include "../entities/entitie.h"
 #include "../utils/clearScreen.h"
+#include "../utils/stringCreate.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "menu.h"
 
@@ -97,10 +99,18 @@ void displayReports(Node *head) {
             case '2':
                 // Chamar função para Buscar Contatos de um Bairro em Específico
                 clearScreen();
-                char neighborhood[45];
                 printf("Insira o bairro que deseja buscar:\n");
-                scanf("%44s", neighborhood);
-                getContacByNeighborhood(head, neighborhood);
+
+                char *dynamicStringInput = stringCreateInput();
+
+                if(dynamicStringInput != NULL) {
+                    getContacByNeighborhood(head, dynamicStringInput);
+
+                    free(dynamicStringInput);
+                } else {
+                    printf("Erro ao capturar o bairro.\n");
+                }
+
                 notClean = 1;
             break;
             case '3':
@@ -204,13 +214,13 @@ void displayInclude(Node **head) {
                 char nameDependent[50];
                 int ageDependent = 0;
                 //gera um número aleatório entre 1 e 1000 para colocar no id
-                snprintf(id, sizeof(id), "%03d", rand() % 1000); 
+                snprintf(id, sizeof(id), "%03d", rand() % 1000);
                 clearScreen();
                 Node *newContact = createContact(id, name, lastName, age, taxNumber, neighborhood, email, phone);
                 printf("Possui dependentes? \n 1-SIM \n 0-NAO\n");
 
                 scanf("%d", &haveDependents);
-                
+
                 if(haveDependents == 1) {
                     printf("Insira os dados do dependente:\n");
                     printf("Nome: ");
