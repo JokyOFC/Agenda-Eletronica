@@ -156,7 +156,7 @@ DependentNode *CreateDependent(const char *name, int age) {
   return new_dependent;
 }
 
-void AddDependent(Contact *contact, const char *name, int age) {
+void addDependent(Contact *contact, const char *name, int age) {
   DependentNode *new_dependent = CreateDependent(name, age);
   if (contact->dependents == NULL) {
     contact->dependents = new_dependent;
@@ -186,13 +186,27 @@ Node *createContact(const char *id, const char *name, const char *lastName,
 }
 
 void insertContact(Node **head, Node *new_contact) {
-  new_contact->next = *head;
-  *head = new_contact;
-  bubbleSort(head);
+  Node *current = *head;
+  int isExists = 0;
+  while (current != NULL){
+    if (strcmp(current->contact.name, new_contact->contact.name) == 0 && strcmp(current->contact.lastName, new_contact->contact.lastName)  == 0) {
+      printf("Já existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
+      isExists = 1;
+    } 
+    current = current->next;
+  }
+  
+  if(isExists == 0) {
+    new_contact->next = *head;
+    *head = new_contact;
+    bubbleSort(head);
+    printf("Contato criado com sucesso.\n\n");
+  }
+  
 }
 
 void createMockContacts(Node **head) {
-  insertContact(head, createContact("3", "Alice", "Johnson", 42, "45678912300",
+  insertContact(head, createContact("3", "Alice", "Johnsonnn", 42, "45678912300",
                                     "Midtown", "alice.johnson@example.com",
                                     "71982659845"));
   insertContact(head,
@@ -213,7 +227,7 @@ void createMockContactWithDependent(Node **head) {
   Node *contact =
       createContact("4", "Bob", "Builder", 50, "32165498700", "Hometown",
                     "bob.builder@example.com", "71982659845");
-  AddDependent(&contact->contact, "Alice", 25);
-  AddDependent(&contact->contact, "Tom", 15);
+  addDependent(&contact->contact, "Alice", 25);
+  addDependent(&contact->contact, "Tom", 15);
   insertContact(head, contact);
 }
