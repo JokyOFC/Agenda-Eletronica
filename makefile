@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g
-OBJ = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o
+OBJ = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.c
 
 SRC_DIRS = menu dependencies utils datasources entities
 SRC_FILES = $(wildcard $(addsuffix /*.c, $(SRC_DIRS)) main.c)
@@ -25,6 +25,9 @@ utils/bubble_sort.o: utils/bubble_sort.c utils/bubble_sort.h entities/entitie.h
 
 utils/clearScreen.o: utils/clearScreen.c utils/clearScreen.h
 	$(CC) $(CFLAGS) -c utils/clearScreen.c -o utils/clearScreen.o
+
+utils/stringCreate.o: utils/stringCreate.c utils/stringCreate.h
+	$(CC) $(CFLAGS) -c utils/stringCreate.c -o utils/stringCreate.o
 
 clean:
 	rm -f *.o agenda
