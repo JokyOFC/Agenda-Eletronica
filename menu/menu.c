@@ -123,6 +123,9 @@ void displayReports(Node *head) {
                 notClean = 1;
             break;
             case '4':
+                clearScreen();
+                getAllDependentsByAgeAndContactName(head);
+                notClean = 1;
                 // Chamar função para Listar Dependentes Menores de 18 Anos
             break;
             case '0':
@@ -145,7 +148,7 @@ void displayRemove(Node *head) {
         displayAsciiArt();
         printf("\n------ Remover ------\n");
         printf("1. Contato\n");
-        printf("2. Dependete\n");
+        printf("2. Dependente\n");
         printf("0. Voltar\n");
         printf("Escolha uma opção: ");
         scanf(" %c", &option);
@@ -177,7 +180,7 @@ void displayInclude(Node **head) {
         displayAsciiArt();
         printf("\n------ Incluir ------\n");
         printf("1. Contato\n");
-        printf("2. Dependete\n");
+        printf("2. Dependente\n");
         printf("0. Voltar\n");
         printf("Escolha uma opção: ");
         scanf(" %c", &option);

@@ -145,8 +145,41 @@ void getContactsByName(Node *head, char name[]) {
     printf("\n");
 }
 
-void getAllDependentsByAgeAndContactName(Contact contacts[], int dependentAge,
-                                         char contactName[]) {}
+void getAllDependentsByAgeAndContactName(Node *head) {
+  Node *current = head;
+
+  printf("\n------ Dependentes Menores de 18 Anos ------\n");
+
+  if (current == NULL) {
+    printf("Nenhum contato encontrado.\n\n");
+    return;
+  }
+
+  int minorFound = 0;
+
+  while (current != NULL) {
+    DependentNode *depCurrent = current->contact.dependents;
+    int contactHasMinors = 0;
+
+    while (depCurrent != NULL) {
+      if (depCurrent->dependent.age < 18) {
+        if (!contactHasMinors) {
+          printf("Contato: %s %s\n", current->contact.name, current->contact.lastName);
+          contactHasMinors = 1;
+        }
+        printf("\t- Dependente: %s, Idade: %d\n", depCurrent->dependent.name, depCurrent->dependent.age);
+        minorFound = 1;
+      }
+      depCurrent = depCurrent->next;
+    }
+
+    current = current->next;
+  }
+
+  if (!minorFound) {
+    printf("Nenhum dependente menor de 18 anos encontrado.\n\n");
+  }
+  }
 
 DependentNode *CreateDependent(const char *name, int age) {
   DependentNode *new_dependent = (DependentNode *)malloc(sizeof(DependentNode));
@@ -227,7 +260,13 @@ void createMockContactWithDependent(Node **head) {
   Node *contact =
       createContact("4", "Bob", "Builder", 50, "32165498700", "Hometown",
                     "bob.builder@example.com", "71982659845");
-  addDependent(&contact->contact, "Alice", 25);
-  addDependent(&contact->contact, "Tom", 15);
+  Node *contact2 =
+      createContact("4", "Renan", "Batista", 80, "32165498700", "Hometown",
+                    "bob.builder@example.com", "71982659845");
+  addDependent(&contact->contact, "Alice", 35);
+  addDependent(&contact->contact, "Tom", 18);
+  addDependent(&contact2->contact, "Renanzinho", 3);
   insertContact(head, contact);
+  insertContact(head, contact2);
 }
+
