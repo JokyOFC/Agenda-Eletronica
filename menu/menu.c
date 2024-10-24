@@ -239,10 +239,10 @@ void displayInclude(Node **head) {
             case '2':
                 clearScreen();
                 printf("Para qual contato deseja incluir dependente?: \n");
-                char contactName[50];
+                // char contactName[50];
 
-                scanf("%s", contactName);
-                Node * contactFound = searchContactAndReturn(head, contactName);
+                    char *dynamicStringInput = stringCreateInput();
+                Node * contactFound = searchContactAndReturn(head, dynamicStringInput);
                 if(contactFound != NULL) {
                     char nameDependent[50];
                     int ageDependent = 0;
@@ -254,7 +254,7 @@ void displayInclude(Node **head) {
                     addDependent(&contactFound->contact, nameDependent, ageDependent);
                     printf("\nDependente adicionado com sucesso!\n");
                 } else {
-                    printf("Contato com o nome: %s não encontrado\n", contactName);
+                    printf("Contato com o nome: %s não encontrado\n", dynamicStringInput);
                 }
                 notClean = 1;
                     break;
