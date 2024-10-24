@@ -17,4 +17,6 @@ void addDependent(Contact *contact, const char *name, int age);
 void createMockContacts(Node **head);
 void createMockContactWithDependent(Node **head);
 
+Node *searchContactAndReturn(Node **head, const char *name);
+
 #endif

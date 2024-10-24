@@ -237,7 +237,26 @@ void displayInclude(Node **head) {
                 notClean = 1;
                     break;
             case '2':
-                // Adicionar Dependente
+                clearScreen();
+                printf("Para qual contato deseja incluir dependente?: \n");
+                char contactName[50];
+
+                scanf("%s", contactName);
+                Node * contactFound = searchContactAndReturn(head, contactName);
+                if(contactFound != NULL) {
+                    char nameDependent[50];
+                    int ageDependent = 0;
+                    printf("Insira os dados do dependente:\n");
+                    printf("Nome: ");
+                    scanf("%49s", nameDependent);
+                    printf("Idade: ");
+                    scanf("%d", &ageDependent);
+                    addDependent(&contactFound->contact, nameDependent, ageDependent);
+                    printf("\nDependente adicionado com sucesso!\n");
+                } else {
+                    printf("Contato com o nome: %s não encontrado\n", contactName);
+                }
+                notClean = 1;
                     break;
             case '0':
                 return;
