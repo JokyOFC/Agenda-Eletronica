@@ -1,0 +1,4 @@
+# Configuração para clang-format
+BasedOnStyle: LLVM  # ou outro estilo base que você preferir https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+IndentWidth: 4      # Define a largura da indentação para 4 espaços
+UseTab: Never        # Não usar tabulações, apenas espaços

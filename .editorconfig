@@ -19,10 +19,5 @@ max_line_length = 80         # Limite de 80 caracteres por linha
 [*.h]
 indent_size = 4              # 4 espaços para arquivos de cabeçalho C
 max_line_length = 80         # Limite de 80 caracteres por linha
-
-[*.cpp]
-indent_size = 4              # 4 espaços para arquivos C++
-max_line_length = 80         # Limite de 80 caracteres por linha
-
-[*.h]
 indent_style = space         # Use espaços para indentação
+

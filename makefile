@@ -27,7 +27,7 @@ utils/clearScreen.o: utils/clearScreen.c utils/clearScreen.h
 	$(CC) $(CFLAGS) -c utils/clearScreen.c -o utils/clearScreen.o
 
 clean:
-	rm -f *.o agenda
+	rm -f $(OBJ) agenda
 
 install-dev-dependencies:
 	sudo apt-get install cppcheck clang-format
