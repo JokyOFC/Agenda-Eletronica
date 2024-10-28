@@ -202,6 +202,17 @@ void addDependent(Contact *contact, const char *name, int age) {
   }
 }
 
+Node *searchContactAndReturn(Node **head, const char *name) {
+    Node *current = *head;
+    while (current != NULL) {
+        if (strcmp(current->contact.name, name) == 0) {
+            return current;
+        }
+        current = current->next;
+    }
+    return NULL;
+}
+
 Node *createContact(const char *id, const char *name, const char *lastName,
                     int age, const char *taxNumber, const char *neighborhood,
                     const char *email, const char *phone) {
@@ -225,17 +236,17 @@ void insertContact(Node **head, Node *new_contact) {
     if (strcmp(current->contact.name, new_contact->contact.name) == 0 && strcmp(current->contact.lastName, new_contact->contact.lastName)  == 0) {
       printf("Já existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
       isExists = 1;
-    } 
+    }
     current = current->next;
   }
-  
+
   if(isExists == 0) {
     new_contact->next = *head;
     *head = new_contact;
     bubbleSort(head);
     printf("Contato criado com sucesso.\n\n");
   }
-  
+
 }
 
 void createMockContacts(Node **head) {
