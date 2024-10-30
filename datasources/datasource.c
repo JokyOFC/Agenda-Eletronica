@@ -235,7 +235,35 @@ void insertContact(Node **head, Node *new_contact) {
     bubbleSort(head);
     printf("Contato criado com sucesso.\n\n");
   }
-  
+}
+
+void editContact(Node *head, const char *name, const char *newName,
+                 const char *newLastName, int newAge, const char *newTaxNumber,
+                 const char *newNeighborhood, const char *newEmail,
+                 const char *newPhone) {
+  Node *current = head;
+  int foundContact = 0;
+
+  while (current != NULL) {
+    if (strcmp(current->contact.name, name) == 0) {
+      strcpy(current->contact.name, newName);
+      strcpy(current->contact.lastName, newLastName);
+      current->contact.age = newAge;
+      strcpy(current->contact.taxNumber, newTaxNumber);
+      strcpy(current->contact.neighborhood, newNeighborhood);
+      strcpy(current->contact.email, newEmail);
+      strcpy(current->contact.phone, newPhone);
+
+      printf("Contato com ID %s atualizado com sucesso.\n", id);
+      foundContact = 1;
+      break;
+    }
+    current = current->next;
+  }
+
+  if (!foundContact) {
+    printf("Contato com ID %s não encontrado.\n", id);
+  }
 }
 
 void createMockContacts(Node **head) {
