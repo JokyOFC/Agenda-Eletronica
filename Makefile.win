@@ -1,0 +1,45 @@
+# Project: Agenda-Eletronica
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = mingw32-g++.exe
+CC   = mingw32-gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = main.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o menu/menu.o datasources/datasource.o $(RES)
+LINKOBJ  = main.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o menu/menu.o datasources/datasource.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib"  
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = Agenda-Eletronica.exe
+CXXFLAGS = $(CXXINCS)  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Agenda-Eletronica.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "Agenda-Eletronica.exe" $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+utils/bubble_sort.o: utils/bubble_sort.c
+	$(CC) -c utils/bubble_sort.c -o utils/bubble_sort.o $(CFLAGS)
+
+utils/clearScreen.o: utils/clearScreen.c
+	$(CC) -c utils/clearScreen.c -o utils/clearScreen.o $(CFLAGS)
+
+utils/stringCreate.o: utils/stringCreate.c
+	$(CC) -c utils/stringCreate.c -o utils/stringCreate.o $(CFLAGS)
+
+menu/menu.o: menu/menu.c
+	$(CC) -c menu/menu.c -o menu/menu.o $(CFLAGS)
+
+datasources/datasource.o: datasources/datasource.c
+	$(CC) -c datasources/datasource.c -o datasources/datasource.o $(CFLAGS)
