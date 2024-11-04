@@ -20,7 +20,7 @@ int main(){
 	
 	
 	//createMockContacts(&contact_list); 	//Cria a lista de contatos em Entidades
-	//createMockContactWithDependent(&contact_list); //Cria a lista dos dependentes dos contatos em Entidades
+	createMockContactWithDependent(&contact_list); //Cria a lista dos dependentes dos contatos em Entidades
 	displayMenu(contact_list);	//Chama o Menu (Inicio) do programa
 	
 		

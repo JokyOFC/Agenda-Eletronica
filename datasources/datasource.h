@@ -17,6 +17,9 @@ void getContacByNeighborhood(Node *head, char neighborhood[]);
 void getContactsByName(Node *head, char name[]);
 void getAllDependentsByAgeAndContactName(Node *head);
 void addDependent(Contact *contact, const char *name, int age);
+void removeContact(Node **head, const char *contactName);
+void removeDependent(Node **head, const char *contactName, const char *dependentName);
+
 
 void createMockContacts(Node **head);
 void createMockContactWithDependent(Node **head);

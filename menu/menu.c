@@ -156,12 +156,29 @@ void displayRemove(Node *head) {
         scanf(" %c", &option);
 
         switch (option) {
-            case '1':
-                // Remover Contato
-                    break;
-            case '2':
-                // Remover Dependente
-                    break;            
+            case '1':{
+				clearScreen();
+                char contactName[50];
+                printf("Insira o nome do contato que deseja remover: ");
+                scanf("%49s", contactName);
+                removeContact(&head, contactName);
+                notClean = 1;
+			}   
+            break;
+            
+            case '2':{	
+            	clearScreen();
+				char contactName[50];
+				char dependentName[50];
+				printf("Insira o nome do contato do dependente: ");
+				scanf("%49s",contactName);
+				printf("Insira o nome do dependente que deseja remover: ");
+				scanf("%49s",dependentName);
+				removeDependent(&head, contactName, dependentName);
+				notClean = 1;    	
+				}
+            break;
+			        
             case '0':
                 return;
             default:

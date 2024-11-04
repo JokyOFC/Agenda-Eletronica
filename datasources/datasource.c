@@ -250,6 +250,75 @@ void insertContact(Node **head, Node *new_contact) {
 
 }
 
+
+void removeContact(Node **head, const char *contactName){
+	
+	Node *current = *head;
+	Node *prev = NULL;
+	
+	while (current != NULL){
+		
+		if(strcmp(current->contact.name, contactName) == 0){
+		
+			if(prev==NULL){
+			
+				*head = current->next;
+			} else {
+				prev->next = current->next;
+			}
+			
+			DependentNode *depCurrent = current->contact.dependents;
+			while(depCurrent!=NULL){
+				DependentNode *temp = depCurrent;
+				depCurrent = depCurrent->next;
+				free(temp);
+			}
+			
+			free(current);
+			
+			printf("Contato '%s' removido com sucesso. \n", contactName);
+			return;
+		}
+		
+		prev = current;
+		current = current->next;
+		
+	}
+	
+	printf("Contato '%s' não encontrado. \n", contactName);
+}
+
+void removeDependent(Node **head, const char *contactName, const char *dependentName){
+	Node *current  = *head;
+	while(current !=NULL){
+		
+		if(strcmp(current->contact.name,contactName)==0){
+			DependentNode *depCurrent =  current->contact.dependents;
+			DependentNode *prev = NULL;
+			
+			while(depCurrent!=NULL){
+				if(strcmp(depCurrent->dependent.name, dependentName)==0){
+					if(prev==NULL){
+						current->contact.dependents = depCurrent->next;
+					} else {
+						prev->next = depCurrent->next;
+					}
+					free(depCurrent);
+					printf("Dependente '%s' removido do contato '%s' com sucesso. \n",dependentName, contactName);
+					return;
+				}
+				prev = depCurrent;
+				depCurrent = depCurrent->next;
+			}
+			printf("Dependente '%s' não encontrado para o contato '%s'. \n", dependentName, contactName);
+			return;
+		}
+		current = current->next;
+	}
+	printf("Contato '%s' não encontrado. \n", contactName);
+}
+
+
 void createMockContacts(Node **head) {
   insertContact(head, createContact("3", "Alice", "Johnsonnn", 42, "45678912300",
                                     "Midtown", "alice.johnson@example.com",
