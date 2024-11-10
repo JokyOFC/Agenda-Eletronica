@@ -64,6 +64,7 @@ void displayMenu(Node *head) {
             break;           
             case '0':
                 clearScreen();
+                saveContactsToFile(head);
                 printf("Saindo...\n");
             break;
             default:

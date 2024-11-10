@@ -25,5 +25,6 @@ void createMockContacts(Node **head);
 void createMockContactWithDependent(Node **head);
 
 Node *searchContactAndReturn(Node **head, const char *name);
+void saveContactsToFile(Node *head);
 
 #endif
