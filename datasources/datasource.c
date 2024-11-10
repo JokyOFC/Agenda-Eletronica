@@ -28,11 +28,11 @@ void getContacts(Node *head) {
     if (current->contact.dependents != NULL) {
       printf("Dependentes:\n");
       DependentNode *depCurrent = current->contact.dependents;
-      while (depCurrent != NULL) {
-        printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
-               depCurrent->dependent.age);
-        depCurrent = depCurrent->next;
-      }
+      do {
+	    printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
+	           depCurrent->dependent.age);
+	    depCurrent = depCurrent->next;
+	  } while (depCurrent != current->contact.dependents);
     } else {
       printf("Nenhum dependente cadastrado.\n");
     }
@@ -86,10 +86,11 @@ void getContacByNeighborhood(Node *head, char neighborhood[]) {
       if (current->contact.dependents != NULL) {
         printf("Dependentes:\n");
         DependentNode *depCurrent = current->contact.dependents;
-        while (depCurrent != NULL) {
-          printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name, depCurrent->dependent.age);
-          depCurrent = depCurrent->next;
-        }
+        do {
+	    printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
+	           depCurrent->dependent.age);
+	    depCurrent = depCurrent->next;
+	  } while (depCurrent != current->contact.dependents);
       }
       printf("----------------------------\n");
       foundContact = 1;
@@ -124,11 +125,11 @@ void getContactsByName(Node *head, char name[]) {
       if (current->contact.dependents != NULL) {
       printf("Dependentes:\n");
       DependentNode *depCurrent = current->contact.dependents;
-      while (depCurrent != NULL) {
-        printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
-               depCurrent->dependent.age);
-        depCurrent = depCurrent->next;
-      }
+      do {
+	    printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
+	           depCurrent->dependent.age);
+	    depCurrent = depCurrent->next;
+	  } while (depCurrent != current->contact.dependents);
       } else {
         printf("Nenhum dependente cadastrado.\n");
       }
@@ -162,16 +163,18 @@ void getAllDependentsByAgeAndContactName(Node *head) {
     DependentNode *depCurrent = current->contact.dependents;
     int contactHasMinors = 0;
 
-    while (depCurrent != NULL) {
-      if (depCurrent->dependent.age < 18) {
-        if (!contactHasMinors) {
-          printf("Contato: %s %s\n", current->contact.name, current->contact.lastName);
-          contactHasMinors = 1;
+    if (depCurrent != NULL) {
+      do {
+        if (depCurrent->dependent.age < 18) {
+          if (!contactHasMinors) {
+            printf("Contato: %s %s\n", current->contact.name, current->contact.lastName);
+            contactHasMinors = 1;
+          }
+          printf("\t- Dependente: %s, Idade: %d\n", depCurrent->dependent.name, depCurrent->dependent.age);
+          minorFound = 1;
         }
-        printf("\t- Dependente: %s, Idade: %d\n", depCurrent->dependent.name, depCurrent->dependent.age);
-        minorFound = 1;
-      }
-      depCurrent = depCurrent->next;
+        depCurrent = depCurrent->next;
+      } while (depCurrent != current->contact.dependents);
     }
 
     current = current->next;
@@ -194,12 +197,14 @@ void addDependent(Contact *contact, const char *name, int age) {
   DependentNode *new_dependent = CreateDependent(name, age);
   if (contact->dependents == NULL) {
     contact->dependents = new_dependent;
+    new_dependent->next = new_dependent;
   } else {
     DependentNode *current = contact->dependents;
-    while (current->next != NULL) {
+    while (current->next != contact->dependents) {
       current = current->next;
     }
     current->next = new_dependent;
+    new_dependent->next = contact->dependents;
   }
 }
 
