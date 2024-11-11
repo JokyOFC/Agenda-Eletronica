@@ -372,3 +372,51 @@ void createMockContactWithDependent(Node **head) {
   insertContact(head, contact);
   insertContact(head, contact2);
 }
+
+
+void saveContactsToFile(Node *head) {
+  FILE *file = fopen("save_contacts.txt", "w");
+  if (file == NULL) {
+    printf("Erro ao abrir o arquivo save_contacts.txt para escrita.\n");
+    return;
+  }
+
+  Node *current = head;
+
+  fprintf(file, "\n------ Lista de Contatos ------\n");
+
+  if (current == NULL) {
+    fprintf(file, "Nenhum contato encontrado.\n\n");
+    fclose(file);
+    return;
+  }
+
+  while (current != NULL) {
+    fprintf(file, "ID: %s\n", current->contact.id);
+    fprintf(file, "Nome: %s %s\n", current->contact.name, current->contact.lastName);
+    fprintf(file, "Idade: %d\n", current->contact.age);
+    fprintf(file, "Número de Contribuinte: %s\n", current->contact.taxNumber);
+    fprintf(file, "Bairro: %s\n", current->contact.neighborhood);
+    fprintf(file, "Email: %s\n", current->contact.email);
+    fprintf(file, "Telefone: %s\n", current->contact.phone);
+
+    if (current->contact.dependents != NULL) {
+      fprintf(file, "Dependentes:\n");
+      DependentNode *depCurrent = current->contact.dependents;
+      do {
+        fprintf(file, "\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
+                depCurrent->dependent.age);
+        depCurrent = depCurrent->next;
+      } while (depCurrent != current->contact.dependents);
+    } else {
+      fprintf(file, "Nenhum dependente cadastrado.\n");
+    }
+
+    fprintf(file, "----------------------------\n");
+    current = current->next;
+  }
+
+  fprintf(file, "\n");
+  fclose(file);
+  printf("Contatos registrados com sucesso em save_contacts.txt.\n");
+}
