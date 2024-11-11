@@ -2,6 +2,8 @@
 #include "../entities/entitie.h"
 #include "../utils/clearScreen.h"
 #include "../utils/stringCreate.h"
+#include "../utils/insertValidate.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,9 +38,9 @@ void displayMenu(Node *head) {
                         
         printf("\n------ Menu ------\n");
         printf("1. Relatórios/Buscas\n");
-        printf("2. Remover Contato\n");
-        printf("3. Editar Contato\n");
-        printf("4. Adicionar Novo Contato\n");
+        printf("2. Remover Contato/Dependente\n");
+        printf("3. Editar Contato/Dependente\n");
+        printf("4. Adicionar Novo Contato/Dependente\n");
         printf("0. Fechar Agenda\n");
         printf("Escolha uma opção: ");
         scanf(" %c", &option);
@@ -217,20 +219,64 @@ void displayInclude(Node **head) {
                 char neighborhood[50];
                 char email[100];
                 char phone[20];
+                
+                int *validMessage;
+                
                 printf("Nome: ");
-                scanf("%49s", name);
+                scanf("%49s", name);  
+                validMessage = insertValidate(1, 1, name);								               
+                if(validMessage == 1){
+                	notClean = 1;
+                	break;
+				}		
+								                              
                 printf("Sobrenome: ");
-                scanf("%49s", lastName);
+                scanf("%49s", lastName);										          
+                validMessage = insertValidate(1, 1, lastName);                
+                if(validMessage == 1){
+                	notClean = 1;             	
+					break;    	
+				}
+                
                 printf("Idade: ");
-                scanf("%d", &age);
-                printf("RG/CPF: ");
-                scanf("%13s", taxNumber);
+                scanf("%d", &age);        
+                if(age < 1 || age > 102){                	 
+                	sendMessageValid("Idade não pode ser menor ou igual a zero, ou maior que 102 anos.");
+                	notClean = 1;             	
+					break;
+                }
+                
+                printf("CPF: ");
+                scanf("%13s", taxNumber); 
+				validMessage = insertValidate(1, 2, taxNumber);              
+                if(validMessage == 1){
+                	notClean = 1;             	
+					break;
+                }
+                                  
                 printf("Bairro: ");
                 scanf("%49s", neighborhood);
+                validMessage = insertValidate(1, 5, neighborhood);              
+                if(validMessage == 1){
+                	notClean = 1;             	
+					break;
+                }                
+                
                 printf("Email: ");
                 scanf("%99s", email);
+                validMessage = insertValidate(1, 4, email);              
+                if(validMessage == 1){
+                	notClean = 1;             	
+					break;
+                }
+                
                 printf("Telefone: ");
                 scanf("%19s", phone);
+                validMessage = insertValidate(1, 3, phone);              
+                if(validMessage == 1){
+                	notClean = 1;             	
+					break;
+                }
 
                 int haveDependents = 0;
                 char nameDependent[50];
@@ -247,18 +293,30 @@ void displayInclude(Node **head) {
                     printf("Insira os dados do dependente:\n");
                     printf("Nome: ");
                     scanf("%49s", nameDependent);
-                    printf("Idade: ");
-                    scanf("%d", &ageDependent);
+                    validMessage = insertValidate(2, 1, nameDependent);              
+	                if(validMessage == NULL){
+	                	notClean = 1;             	
+						break;
+	                }
+	                
+                    printf("Idade: ");    
+					scanf("%d", &ageDependent);                           
+	                if(ageDependent < 1 || ageDependent > 102){
+                		sendMessageValid("Idade não pode ser menor ou igual a zero, ou maior que 102 anos.");
+	                	notClean = 1;             	
+						break;
+	                }                    
+                    
                     addDependent(&newContact->contact, nameDependent, ageDependent);
                 }
 
                 insertContact(head, newContact);
                 notClean = 1;
-                    break;
+                break;
             case '2':
                 // Adicionar Dependente
                 clearScreen();
-                printf("Para qual contato deseja incluir dependente?: \n");
+                printf("Para qual contato deseja incluir dependente? \n");
                 // char contactName[50];
 
                 char *dynamicStringInput = stringCreateInput();
@@ -266,11 +324,26 @@ void displayInclude(Node **head) {
                 if(contactFound != NULL) {
                     char nameDependent[50];
                     int ageDependent = 0;
+                    
+                    bool *validMessage = 0;
+                    
                     printf("Insira os dados do dependente:\n");
-                    printf("Nome: ");
+                    printf("Nome: ");                    
                     scanf("%49s", nameDependent);
+                    validMessage = insertValidate(2, 1, nameDependent);              
+	                if(validMessage == 1){
+	                	notClean = 1;             	
+						break;
+	                }
+                    
                     printf("Idade: ");
                     scanf("%d", &ageDependent);
+                    if(ageDependent < 1 || ageDependent > 102){
+                		sendMessageValid("Idade não pode ser menor ou igual a zero, ou maior que 102 anos.");
+	                	notClean = 1;             	
+						break;
+	                }  	                
+	                
                     addDependent(&contactFound->contact, nameDependent, ageDependent);
                     printf("\nDependente adicionado com sucesso!\n");
                 } else {

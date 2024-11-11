@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 //Arquivo de escreve e as funções e as definem
 void getContacts(Node *head) {
   Node *current = head;
@@ -71,10 +72,15 @@ void getContacByNeighborhood(Node *head, char neighborhood[]) {
   Node *current = head;
   int foundContact = 0;
 
+  //char tempNeighborhood[50]; 
+  
   printf("\n------Contato(s) no bairro: %s------\n", neighborhood);
-
+  	
   while (current != NULL) {
-    if (strcmp(current->contact.neighborhood, neighborhood) == 0) {
+  	//strncpy(tempNeighborhood, current->contact.neighborhood, sizeof(tempNeighborhood) - 1);
+    //tempNeighborhood[sizeof(tempNeighborhood) - 1] = '\0';   	
+  	
+    if (strcmp(tempNeighborhood, strlwr(neighborhood)) == 0) {
       printf("ID: %s\n", current->contact.id);
       printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
       printf("Age: %d\n", current->contact.age);
@@ -209,13 +215,24 @@ void addDependent(Contact *contact, const char *name, int age) {
 }
 
 Node *searchContactAndReturn(Node **head, const char *name) {
-    Node *current = *head;
-    while (current != NULL) {
-        if (strcmp(current->contact.name, name) == 0) {
+    Node *current = *head;  
+    char nameTemp[50];
+    char lastNameTemp[50];
+    
+    while (current != NULL) { 	
+		strncpy(nameTemp, current->contact.name, sizeof(nameTemp) - 1);
+		nameTemp[sizeof(nameTemp) - 1] = '\0';
+		
+		strncpy(lastNameTemp, current->contact.lastName, sizeof(lastNameTemp) - 1);
+		lastNameTemp[sizeof(lastNameTemp) - 1] = '\0';
+				 	   	
+        if (strcmp(strlwr(nameTemp), strlwr(name)) == 0 || 
+			strcmp(strlwr(lastNameTemp), strlwr(name)) == 0) {
             return current;
         }
         current = current->next;
-    }
+    }   
+	    
     return NULL;
 }
 
