@@ -3,6 +3,7 @@
 #include "../utils/clearScreen.h"
 #include "../utils/stringCreate.h"
 #include "../utils/insertValidate.h"
+#include "../utils/listUtils.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,8 +58,10 @@ void displayMenu(Node *head) {
                 notClean = 0;
             break;
             case '3':
-                // Chamar função para editar contato
-                    break;
+                clearScreen();
+                displayEdit(head);
+                notClean = 0;
+            break;
             case '4':
                 clearScreen();
                 displayInclude(&head);
@@ -79,7 +82,10 @@ void displayMenu(Node *head) {
 }
 
 void displayReports(Node *head) {
+     
     char option;
+    char *dynamicStringInput = NULL;
+    
     do {
         if(!notClean) {
             clearScreen();
@@ -106,25 +112,35 @@ void displayReports(Node *head) {
                 clearScreen();
                 printf("Insira o bairro que deseja buscar:\n");
 
-                char *dynamicStringInput = stringCreateInput();
+                dynamicStringInput = stringCreateInput();
 
                 if(dynamicStringInput != NULL) {
                     getContacByNeighborhood(head, dynamicStringInput);
-
-                    free(dynamicStringInput);
                 } else {
                     printf("Erro ao capturar o bairro.\n");
                 }
-
+                
+                free(dynamicStringInput);
+                dynamicStringInput = NULL;
                 notClean = 1;
             break;
             case '3':
                 // Chamar função para Buscar Contato em Específico e Seus Dependentes
                 clearScreen();
-                char name[45];
+                
                 printf("Insira o nome do contato que deseja buscar:\n");
-                scanf("%44s", name);
-                getContactsByName(head, name);
+                
+                dynamicStringInput = stringCreateInput();
+                
+                if(dynamicStringInput != NULL){
+                     getContactsByName(head, dynamicStringInput);
+                     
+                } else {
+                     printf("Erro ao capturar o contato.\n"); 
+                }
+                
+                free(dynamicStringInput);
+                dynamicStringInput = NULL;
                 notClean = 1;                    
             break;
             case '4':
@@ -141,6 +157,224 @@ void displayReports(Node *head) {
             break;
         }
     } while (option != '0');
+}
+
+void displayEdit(Node *head) {
+     
+     char *dynamicStringInput = NULL;
+     char option;
+     
+     do{
+        if(!notClean) {
+            clearScreen();
+            notClean = 0;
+        }
+        displayAsciiArt();
+        printf("\n------ Editar ------\n");
+        printf("1. Contato\n");
+        printf("2. Dependete\n");
+        printf("0. Voltar\n");
+        printf("Escolha uma opção: ");
+        scanf(" %c", &option);
+        
+        switch(option){
+           case '1':
+                clearScreen();
+                printf("Digite o nome do contato que deseja editar: \n");
+
+                dynamicStringInput = stringCreateInput();
+                
+                int size;
+                Node **array = linkedListToArray(head, &size);
+                
+                int index = binarySearch(array, size, dynamicStringInput);
+                
+                if (index != -1) {
+                    displayEditContact(array[index]);
+                } else {
+                    printf("Contato nao encontrado.\n");
+                }
+                
+                free(dynamicStringInput);
+                free(array);
+                notClean = 1;
+           break;
+           case '2':
+                
+                
+                
+           break;
+           case '0':
+                return;
+           default:
+                clearScreen();
+                printf("Opção inválida. Tente novamente.\n");
+           break;       
+        }  
+        
+     } while(option != '0');
+     
+}
+
+void displayEditContact(Node *head){
+     
+     char *dynamicStringInput = NULL;
+     char secondOption;
+     
+     do{
+       if(!notClean) {
+           clearScreen();
+           notClean = 0;
+       }
+       printf("\n------ Contato Encontrado ------\n");
+       printContact(&head->contact);
+       printf("\n--------------------------------\n");
+       printf("1. Nome\n");
+       printf("2. Sobrenome\n");
+       printf("3. Idade\n");
+       printf("4. CPF\n");
+       printf("5. Bairro\n");
+       printf("6. Email\n");
+       printf("7. Telefone\n");
+       printf("0. Voltar\n");
+       printf("Digite qual informação deseja alterar no contato: ");
+       scanf(" %c", &secondOption);
+                        
+       switch(secondOption){
+            case '1':
+                 printf("Digite o novo Nome do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "") {
+                 
+                     editContact(head, dynamicStringInput,NULL, NULL, NULL,NULL, NULL,NULL);
+                     
+                 } else {
+                        
+                     printf("Nome inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '2':
+                 printf("Digite o novo Sobrenome do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "") {
+                 
+                     editContact(head, NULL,dynamicStringInput, NULL, NULL,NULL, NULL,NULL);
+                     
+                 } else {
+                        
+                     printf("Sobrenome inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '3':
+                 printf("Digite a nova Idade do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "" && dynamicStringInput != "0") {
+                     
+                     int age = atoi(dynamicStringInput);
+                     editContact(head, NULL, NULL, age, NULL,NULL, NULL,NULL);
+                     
+                 } else {
+                        
+                     printf("Idade inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '4':
+                 printf("Digite o novo CPF do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "" && dynamicStringInput != "0") {
+                     
+                     editContact(head, NULL, NULL, NULL, dynamicStringInput,NULL, NULL,NULL);
+                     
+                 } else {
+                        
+                     printf("CPF inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '5':
+                 printf("Digite o novo Bairro do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "") {
+                     
+                     editContact(head, NULL, NULL, NULL, NULL,dynamicStringInput, NULL,NULL);
+                     
+                 } else {
+                        
+                     printf("Bairro inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '6':
+                 printf("Digite o novo Email do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "") {
+                     
+                     editContact(head, NULL, NULL, NULL, NULL, NULL, dynamicStringInput,NULL);
+                     
+                 } else {
+                        
+                     printf("Email inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '7':
+                 printf("Digite o novo Telefone do contato: ");
+                 dynamicStringInput = stringCreateInput();
+                 clearScreen();
+                 
+                 if(dynamicStringInput != NULL && dynamicStringInput != "") {
+                     
+                     editContact(head, NULL, NULL, NULL, NULL, NULL, NULL, dynamicStringInput);
+                     
+                 } else {
+                        
+                     printf("Telefone inválido");
+                 
+                 }
+                 
+                 notClean = 1;
+                 break;
+            case '0':
+                clearScreen();
+                return;
+            default:
+                clearScreen();
+                printf("Opção inválida. Tente novamente.\n");
+             break;      
+                                 
+         }
+                    
+       } while(secondOption !='0');
+       
+       free(secondOption);
+     
 }
 
 void displayRemove(Node *head) {

@@ -7,6 +7,8 @@ void displayMenu(Node *head);
 void displayReports(Node *head);
 void displayRemove(Node *head);
 void displayInclude(Node **head);
+void displayEdit(Node *head);
+void displayEditContact(Node *head);
 
 #endif	//Finalizar o processo de inclusão do cabeçalho
 

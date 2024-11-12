@@ -71,16 +71,11 @@ void getContactsWhithoutDependents(Node *head) {
 void getContacByNeighborhood(Node *head, char neighborhood[]) {
   Node *current = head;
   int foundContact = 0;
-
-  //char tempNeighborhood[50]; 
   
   printf("\n------Contato(s) no bairro: %s------\n", neighborhood);
   	
   while (current != NULL) {
-  	//strncpy(tempNeighborhood, current->contact.neighborhood, sizeof(tempNeighborhood) - 1);
-    //tempNeighborhood[sizeof(tempNeighborhood) - 1] = '\0';   	
-  	
-    if (strcmp(tempNeighborhood, strlwr(neighborhood)) == 0) {
+    if (strcmp(strlwr(current->contact.neighborhood), strlwr(neighborhood)) == 0) {
       printf("ID: %s\n", current->contact.id);
       printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
       printf("Age: %d\n", current->contact.age);
@@ -118,8 +113,15 @@ void getContactsByName(Node *head, char name[]) {
   printf("\n------Contato(s) com o nome: %s------\n", name);
 
   while (current !=NULL) {
-
-    if (strcmp(current->contact.name, name) == 0) {
+    
+    char fullName[100];
+      strcpy(fullName, current->contact.name);
+      strcat(fullName, " ");
+      strcat(fullName, current->contact.lastName);
+      
+    if (strcmp(strlwr(current->contact.name), strlwr(name)) == 0 || 
+         strcmp(strlwr(fullName), strlwr(name)) == 0) {
+                                  
       printf("ID: %s\n", current->contact.id);
       printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
       printf("Age: %d\n", current->contact.age);
@@ -149,8 +151,10 @@ void getContactsByName(Node *head, char name[]) {
   if(!foundContact) {
     printf("\nEsse contato não existe.\n");
     printf("----------------------------\n");
+    return 0;
   }
     printf("\n");
+    return 1;
 }
 
 void getAllDependentsByAgeAndContactName(Node *head) {
@@ -197,6 +201,63 @@ DependentNode *CreateDependent(const char *name, int age) {
   new_dependent->dependent.age = age;
   new_dependent->next = NULL;
   return new_dependent;
+}
+
+void editContact(Node *head, const char *newName,
+                 const char *newLastName, int newAge, const char *newTaxNumber,
+                 const char *newNeighborhood, const char *newEmail,
+                 const char *newPhone) {
+      
+      if(newName != NULL && newName != ""){
+      
+         strcpy(head->contact.name, newName);  
+           
+      }
+      
+      if(newLastName != NULL && newLastName != ""){
+      
+         strcpy(head->contact.lastName, newLastName);
+           
+      }
+      
+      if(newAge != NULL && newAge != 0) {
+      
+         head->contact.age = newAge;
+         
+      }
+      
+      if(newTaxNumber != NULL && newTaxNumber != ""){
+      
+         strcpy(head->contact.taxNumber, newTaxNumber);  
+           
+      }
+      
+      if(newNeighborhood != NULL && newNeighborhood != ""){
+           
+         strcpy(head->contact.neighborhood, newNeighborhood);  
+      
+      }
+      
+      if(newEmail != NULL && newEmail != ""){
+      
+         strcpy(head->contact.email, newEmail);
+           
+      }
+      
+      if(newPhone != NULL && newPhone != ""){
+      
+         strcpy(head->contact.phone, newPhone);
+           
+      }
+      
+      printf("Contato editado com sucesso.\n");
+
+}
+
+void editDependent(){
+     
+     
+     
 }
 
 void addDependent(Contact *contact, const char *name, int age) {

@@ -1,28 +1,30 @@
 # Project: AgendaConsoleDevC++
-# Makefile created by Dev-C++ 5.7.1
+# Makefile created by Dev-C++ 4.9.9.2
 
-CPP      = g++.exe
-CC       = gcc.exe
-WINDRES  = windres.exe
-OBJ      = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o
-LINKOBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o
-LIBS     = -L"M:/Dev-Cpp/MinGW32/lib" -L"M:/Dev-Cpp/MinGW32/mingw32/lib" -L"C:/GLUT" -static-libstdc++ -static-libgcc -g3
-INCS     = -I"M:/Dev-Cpp/MinGW32/include" -I"M:/Dev-Cpp/MinGW32/mingw32/include" -I"M:/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.8.1/include" -I"C:/GLUT"
-CXXINCS  = -I"M:/Dev-Cpp/MinGW32/include" -I"M:/Dev-Cpp/MinGW32/mingw32/include" -I"M:/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.8.1/include" -I"M:/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.8.1/include/c++" -I"C:/GLUT"
-BIN      = AgendaConsoleDevC++.exe
-CXXFLAGS = $(CXXINCS) -g3
-CFLAGS   = $(INCS) -g3
-RM       = rm.exe -f
+CPP  = mingw32-g++.exe
+CC   = mingw32-gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o utils/listUtils.o $(RES)
+LINKOBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o utils/listUtils.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib"  -fmessage-length=0 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = AgendaConsoleDevC++.exe
+CXXFLAGS = $(CXXINCS)   -fmessage-length=0
+CFLAGS = $(INCS)   -fmessage-length=0
+RM = rm -f
 
 .PHONY: all all-before all-after clean clean-custom
 
-all: all-before $(BIN) all-after
+all: all-before AgendaConsoleDevC++.exe all-after
+
 
 clean: clean-custom
 	${RM} $(OBJ) $(BIN)
 
 $(BIN): $(OBJ)
-	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+	$(CC) $(LINKOBJ) -o "AgendaConsoleDevC++.exe" $(LIBS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -44,3 +46,6 @@ utils/stringCreate.o: utils/stringCreate.c
 
 utils/insertValidate.o: utils/insertValidate.c
 	$(CC) -c utils/insertValidate.c -o utils/insertValidate.o $(CFLAGS)
+
+utils/listUtils.o: utils/listUtils.c
+	$(CC) -c utils/listUtils.c -o utils/listUtils.o $(CFLAGS)

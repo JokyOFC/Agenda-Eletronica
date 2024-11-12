@@ -36,6 +36,8 @@ char *stringCreateInput() {
             }
         }
     }
+    
+    dynamicStringInput[length] = '\0';
 
     return dynamicStringInput;
 }

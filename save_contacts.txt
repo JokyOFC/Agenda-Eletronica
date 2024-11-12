@@ -1,0 +1,69 @@
+
+------ Lista de Contatos ------
+ID: 4
+Nome: Alex Rock
+Idade: 30
+Número de Contribuinte: 84738574938
+Bairro: Midtown
+Email: alexrock@example.com
+Telefone: 71935478132
+Nenhum dependente cadastrado.
+----------------------------
+ID: 1
+Nome: Alice Doe
+Idade: 35
+Número de Contribuinte: 12345678901
+Bairro: Downtown
+Email: john.doe@example.com
+Telefone: 71982659845
+Nenhum dependente cadastrado.
+----------------------------
+ID: 3
+Nome: Alice Johnsonnn
+Idade: 42
+Número de Contribuinte: 45678912300
+Bairro: Midtown
+Email: alice.johnson@example.com
+Telefone: 71982659845
+Nenhum dependente cadastrado.
+----------------------------
+ID: 4
+Nome: Bob Builder
+Idade: 50
+Número de Contribuinte: 32165498700
+Bairro: Hometown
+Email: bob.builder@example.com
+Telefone: 71982659845
+Dependentes:
+	- Nome: Alice, Idade: 35
+	- Nome: Tom, Idade: 18
+----------------------------
+ID: 2
+Nome: Jane Smith
+Idade: 28
+Número de Contribuinte: 98765432100
+Bairro: Uptown
+Email: jane.smith@example.com
+Telefone: 71982659845
+Nenhum dependente cadastrado.
+----------------------------
+ID: 5
+Nome: Randvi Crow
+Idade: 30
+Número de Contribuinte: 95423915217
+Bairro: Westonty
+Email: randvi@example.com
+Telefone: 71858421017
+Nenhum dependente cadastrado.
+----------------------------
+ID: 4
+Nome: Renan Batista
+Idade: 80
+Número de Contribuinte: 32165498700
+Bairro: Hometown
+Email: bob.builder@example.com
+Telefone: 71982659845
+Dependentes:
+	- Nome: Renanzinho, Idade: 3
+----------------------------
+

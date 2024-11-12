@@ -12,7 +12,6 @@
 
 // Função para limpar a tela de forma portátil
 void clearScreen() {
-    printf("Chamando clearScreen()...\n");
     #ifdef _WIN32  // Se estiver compilando no Windows
         system("cls");
     #elif __linux__ || __APPLE__  // Se estiver compilando no Linux ou MacOS
