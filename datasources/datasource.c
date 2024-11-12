@@ -6,7 +6,7 @@
 #include <string.h>
 
 
-//Arquivo de escreve e as funções e as definem
+//Arquivo de escreve e as funï¿½ï¿½es e as definem
 void getContacts(Node *head) {
   Node *current = head;
 
@@ -109,6 +109,8 @@ void getContacByNeighborhood(Node *head, char neighborhood[]) {
 void getContactsByName(Node *head, char name[]) {
   Node *current = head;
   int foundContact = 0;
+  char tempNameToLowerCase[45];
+  char tempLastNameToLowerCase[45];
 
   printf("\n------Contato(s) com o nome: %s------\n", name);
 
@@ -149,7 +151,7 @@ void getContactsByName(Node *head, char name[]) {
   }
 
   if(!foundContact) {
-    printf("\nEsse contato não existe.\n");
+    printf("\nEsse contato nï¿½o existe.\n");
     printf("----------------------------\n");
     return 0;
   }
@@ -318,7 +320,7 @@ void insertContact(Node **head, Node *new_contact) {
   int isExists = 0;
   while (current != NULL){
     if (strcmp(current->contact.name, new_contact->contact.name) == 0 && strcmp(current->contact.lastName, new_contact->contact.lastName)  == 0) {
-      printf("Já existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
+      printf("Jï¿½ existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
       isExists = 1;
     }
     current = current->next;
@@ -368,7 +370,7 @@ void removeContact(Node **head, const char *contactName){
 		
 	}
 	
-	printf("Contato '%s' não encontrado. \n", contactName);
+	printf("Contato '%s' nï¿½o encontrado. \n", contactName);
 }
 
 void removeDependent(Node **head, const char *contactName, const char *dependentName){
@@ -393,12 +395,12 @@ void removeDependent(Node **head, const char *contactName, const char *dependent
 				prev = depCurrent;
 				depCurrent = depCurrent->next;
 			}
-			printf("Dependente '%s' não encontrado para o contato '%s'. \n", dependentName, contactName);
+			printf("Dependente '%s' nï¿½o encontrado para o contato '%s'. \n", dependentName, contactName);
 			return;
 		}
 		current = current->next;
 	}
-	printf("Contato '%s' não encontrado. \n", contactName);
+	printf("Contato '%s' nï¿½o encontrado. \n", contactName);
 }
 
 
@@ -416,7 +418,7 @@ void createMockContacts(Node **head) {
                 createContact("4", "Alex", "Rock", 30, "84738574938", "Midtown",
                               "alexrock@example.com", "71935478132"));
   insertContact(head,
-                createContact("5", "Randvi", "Crow", 30, "95423915217", "Westonty",
+                createContact("5", "Randvi", "Batista", 30, "95423915217", "Westonty",
                               "randvi@example.com", "71858421017"));
 }
 
@@ -456,7 +458,7 @@ void saveContactsToFile(Node *head) {
     fprintf(file, "ID: %s\n", current->contact.id);
     fprintf(file, "Nome: %s %s\n", current->contact.name, current->contact.lastName);
     fprintf(file, "Idade: %d\n", current->contact.age);
-    fprintf(file, "Número de Contribuinte: %s\n", current->contact.taxNumber);
+    fprintf(file, "Nï¿½mero de Contribuinte: %s\n", current->contact.taxNumber);
     fprintf(file, "Bairro: %s\n", current->contact.neighborhood);
     fprintf(file, "Email: %s\n", current->contact.email);
     fprintf(file, "Telefone: %s\n", current->contact.phone);

@@ -1,19 +1,18 @@
 # Project: AgendaConsoleDevC++
-# Makefile created by Dev-C++ 4.9.9.2
+# Makefile created by Dev-C++ 5.11
 
-CPP  = mingw32-g++.exe
-CC   = mingw32-gcc.exe
-WINDRES = windres.exe
-RES  = 
-OBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o utils/listUtils.o $(RES)
-LINKOBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o utils/listUtils.o $(RES)
-LIBS =  -L"C:/Dev-Cpp/lib"  -fmessage-length=0 
-INCS =  -I"C:/Dev-Cpp/include" 
-CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
-BIN  = AgendaConsoleDevC++.exe
-CXXFLAGS = $(CXXINCS)   -fmessage-length=0
-CFLAGS = $(INCS)   -fmessage-length=0
-RM = rm -f
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o
+LINKOBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = AgendaConsoleDevC++.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
 
