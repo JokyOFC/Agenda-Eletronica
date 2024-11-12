@@ -72,13 +72,13 @@ void getContacByNeighborhood(Node *head, char neighborhood[]) {
   Node *current = head;
   int foundContact = 0;
 
-  //char tempNeighborhood[50]; 
+  char tempNeighborhood[50]; 
   
   printf("\n------Contato(s) no bairro: %s------\n", neighborhood);
   	
   while (current != NULL) {
-  	//strncpy(tempNeighborhood, current->contact.neighborhood, sizeof(tempNeighborhood) - 1);
-    //tempNeighborhood[sizeof(tempNeighborhood) - 1] = '\0';   	
+  	strncpy(tempNeighborhood, current->contact.neighborhood, sizeof(tempNeighborhood) - 1);
+    tempNeighborhood[sizeof(tempNeighborhood) - 1] = '\0';   	
   	
     if (strcmp(tempNeighborhood, strlwr(neighborhood)) == 0) {
       printf("ID: %s\n", current->contact.id);
@@ -114,12 +114,19 @@ void getContacByNeighborhood(Node *head, char neighborhood[]) {
 void getContactsByName(Node *head, char name[]) {
   Node *current = head;
   int foundContact = 0;
+  char tempNameToLowerCase[45];
+  char tempLastNameToLowerCase[45];
 
   printf("\n------Contato(s) com o nome: %s------\n", name);
 
   while (current !=NULL) {
+  	strncpy(tempNameToLowerCase, current->contact.name, sizeof(tempNameToLowerCase) - 1);
+	tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
+	
+	strncpy(tempLastNameToLowerCase, current->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
+	tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0';
 
-    if (strcmp(current->contact.name, name) == 0) {
+    if (strcmp(strlwr(tempNameToLowerCase), strlwr(name)) == 0 || strcmp(strlwr(tempLastNameToLowerCase), strlwr(name)) == 0) {
       printf("ID: %s\n", current->contact.id);
       printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
       printf("Age: %d\n", current->contact.age);
@@ -355,7 +362,7 @@ void createMockContacts(Node **head) {
                 createContact("4", "Alex", "Rock", 30, "84738574938", "Midtown",
                               "alexrock@example.com", "71935478132"));
   insertContact(head,
-                createContact("5", "Randvi", "Crow", 30, "95423915217", "Westonty",
+                createContact("5", "Randvi", "Batista", 30, "95423915217", "Westonty",
                               "randvi@example.com", "71858421017"));
 }
 

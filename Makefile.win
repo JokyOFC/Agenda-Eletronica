@@ -1,14 +1,14 @@
 # Project: AgendaConsoleDevC++
-# Makefile created by Dev-C++ 5.7.1
+# Makefile created by Dev-C++ 5.11
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
 OBJ      = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o
 LINKOBJ  = main.o menu/menu.o datasources/datasource.o utils/bubble_sort.o utils/clearScreen.o utils/stringCreate.o utils/insertValidate.o
-LIBS     = -L"M:/Dev-Cpp/MinGW32/lib" -L"M:/Dev-Cpp/MinGW32/mingw32/lib" -L"C:/GLUT" -static-libstdc++ -static-libgcc -g3
-INCS     = -I"M:/Dev-Cpp/MinGW32/include" -I"M:/Dev-Cpp/MinGW32/mingw32/include" -I"M:/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.8.1/include" -I"C:/GLUT"
-CXXINCS  = -I"M:/Dev-Cpp/MinGW32/include" -I"M:/Dev-Cpp/MinGW32/mingw32/include" -I"M:/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.8.1/include" -I"M:/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.8.1/include/c++" -I"C:/GLUT"
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = AgendaConsoleDevC++.exe
 CXXFLAGS = $(CXXINCS) -g3
 CFLAGS   = $(INCS) -g3
