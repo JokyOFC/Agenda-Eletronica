@@ -172,7 +172,7 @@ void displayEdit(Node *head) {
         displayAsciiArt();
         printf("\n------ Editar ------\n");
         printf("1. Contato\n");
-        printf("2. Dependete\n");
+        printf("2. Dependente\n");
         printf("0. Voltar\n");
         printf("Escolha uma opção: ");
         scanf(" %c", &option);
@@ -184,19 +184,17 @@ void displayEdit(Node *head) {
 
                 dynamicStringInput = stringCreateInput();
                 
-                int size;
-                Node **array = linkedListToArray(head, &size);
+                Node * findContact = searchContactAndReturn(&head, dynamicStringInput);
                 
-                int index = binarySearch(array, size, dynamicStringInput);
-                
-                if (index != -1) {
-                    displayEditContact(array[index]);
+                if (findContact != NULL) {
+                	printf("%s ", findContact->contact.name);
+                    displayEditContact(findContact);
                 } else {
                     printf("Contato nao encontrado.\n");
                 }
                 
                 free(dynamicStringInput);
-                free(array);
+              
                 notClean = 1;
            break;
            case '2':
@@ -204,19 +202,14 @@ void displayEdit(Node *head) {
                 printf("Digite o nome do contato que possui o dependente que deseja editar: \n");
 
                 dynamicStringInput = stringCreateInput();
-                
-                array = linkedListToArray(head, &size);
-                
-                index = binarySearch(array, size, dynamicStringInput);
-                
-                if (index != -1) {
-                    displayEditDependent(array[index]);
+            	findContact = searchContactAndReturn(&head, dynamicStringInput);
+                if (findContact) {
+                    displayEditDependent(findContact);
                 } else {
                     printf("Contato nao encontrado.\n");
                 }
                 
                 free(dynamicStringInput);
-                free(array);
                 notClean = 1;
            break;
            case '0':

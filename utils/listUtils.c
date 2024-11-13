@@ -29,44 +29,51 @@ Node **linkedListToArray(Node *head, int *size) {
 int binarySearch(Node **array, int size, const char *name) {
   int left = 0;
   int right = size - 1;
-  
-  char tempNameToLowerCase[45];
-  char tempLastNameToLowerCase[45];  
 
-  //printf("Starting binary search for: %s\n", name);
+  char tempNameToLowerCase[45];
+  char tempLastNameToLowerCase[45];
+  char nameToLowerCase[45];
+
+  // Converte `name` para minúsculas para comparação case-insensitive
+  strncpy(nameToLowerCase, name, sizeof(nameToLowerCase) - 1);
+  nameToLowerCase[sizeof(nameToLowerCase) - 1] = '\0';
+  strlwr(nameToLowerCase);
 
   while (left <= right) {
-  	
-  	strncpy(tempNameToLowerCase, array[mid]->contact.name, sizeof(tempNameToLowerCase) - 1);
-	tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
-	
-	//strncpy(tempLastNameToLowerCase, array[mid]->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
-	//tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0'; 
-		
     int mid = left + (right - left) / 2;
-    int cmp = strcmp(strlwr(array[mid]->contact.name), name); // Access member using .
-    int cmpName = cmp
-	int cmpLastName = strcmp(strlwr(array[mid]->contact.lastName), name);
-    int i =0;
-    
-    // Print statements for debugging (optional)
-    //printf("Iteration: %d\n", i++); // Counter for iterations (optional)
-    //printf("Left: %d, Right: %d, Mid: %d\n", left, right, mid);
-    //printf("Comparison: %d\n", strcmp(array[mid]->contact.name, name));
-    //printf("CMP: %d\n", cmp);
-    //printf("Name at MID: %s\n", array[mid]->contact.name);  // Print full name for debugging
 
+    // Converte `contact.name` para minúsculas
+    strncpy(tempNameToLowerCase, array[mid]->contact.name, sizeof(tempNameToLowerCase) - 1);
+    tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
+    strlwr(tempNameToLowerCase);
+
+    // Converte `contact.lastName` para minúsculas
+    strncpy(tempLastNameToLowerCase, array[mid]->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
+    tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0';
+    strlwr(tempLastNameToLowerCase);
+
+    int cmpName = strcmp(tempNameToLowerCase, nameToLowerCase);
+    int cmpLastName = strcmp(tempLastNameToLowerCase, nameToLowerCase);
+
+    // Debugging opcional
+    printf("Left: %d, Right: %d, Mid: %d\n", left, right, mid);
+    printf("Name at MID: %s, LastName at MID: %s\n", array[mid]->contact.name, array[mid]->contact.lastName);
+    printf("CMP Name: %d, CMP LastName: %d\n", cmpName, cmpLastName);
+
+    // Verifica se `name` corresponde ao `contact.name` ou ao `contact.lastName`
     if (cmpName == 0 || cmpLastName == 0) {
-      return mid; // Contact found
-    } else if (cmp < 0) {
+      return mid; // Contato encontrado
+    } else if (cmpName < 0 && cmpLastName < 0) {
       left = mid + 1;
     } else {
       right = mid - 1;
     }
   }
 
-  return -1; // Contact not found
+  return -1; // Contato não encontrado
 }
+
+
 
 void printContact(Node *node) {
 

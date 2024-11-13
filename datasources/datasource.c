@@ -249,7 +249,7 @@ void editContact(Node *head, const char *newName,
       if(newPhone != NULL && newPhone != ""){      
          strcpy(head->contact.phone, newPhone);           
       }
-      
+     bubbleSort(&head);
       printf("Contato editado com sucesso.\n");
 
 }
@@ -286,15 +286,24 @@ Node *searchContactAndReturn(Node **head, const char *name) {
     char nameTemp[50];
     char lastNameTemp[50];
     
+    char fullName[100];
+    
     while (current != NULL) { 	
 		strncpy(nameTemp, current->contact.name, sizeof(nameTemp) - 1);
 		nameTemp[sizeof(nameTemp) - 1] = '\0';
 		
 		strncpy(lastNameTemp, current->contact.lastName, sizeof(lastNameTemp) - 1);
 		lastNameTemp[sizeof(lastNameTemp) - 1] = '\0';
-				 	   	
+		
+		strcpy(fullName, current->contact.name);
+    	strcat(fullName, " ");
+    	strcat(fullName, current->contact.lastName);
+    	
+		printf("Aqui: %s \n", fullName);
+		printf("%s \n", name);		 	   	
         if (strcmp(strlwr(nameTemp), strlwr(name)) == 0 || 
-			strcmp(strlwr(lastNameTemp), strlwr(name)) == 0) {
+			strcmp(strlwr(lastNameTemp), strlwr(name)) == 0 ||
+			strcmp(strlwr(fullName), strlwr(name)) == 0) {
             return current;
         }
         current = current->next;
