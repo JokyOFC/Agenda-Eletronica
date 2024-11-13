@@ -298,9 +298,7 @@ Node *searchContactAndReturn(Node **head, const char *name) {
 		strcpy(fullName, current->contact.name);
     	strcat(fullName, " ");
     	strcat(fullName, current->contact.lastName);
-    	
-		printf("Aqui: %s \n", fullName);
-		printf("%s \n", name);		 	   	
+    		 	   	
         if (strcmp(strlwr(nameTemp), strlwr(name)) == 0 || 
 			strcmp(strlwr(lastNameTemp), strlwr(name)) == 0 ||
 			strcmp(strlwr(fullName), strlwr(name)) == 0) {
@@ -374,10 +372,14 @@ void removeContact(Node **head, const char *contactName){
 			}
 			
 			DependentNode *depCurrent = current->contact.dependents;
-			while(depCurrent!=NULL){
-				DependentNode *temp = depCurrent;
-				depCurrent = depCurrent->next;
-				free(temp);
+			
+			DependentNode *start = depCurrent;			
+			if (depCurrent != NULL) {
+			    do {
+			        DependentNode *temp = depCurrent;   
+			        depCurrent = depCurrent->next; 
+			        free(temp);  
+			    } while (depCurrent != start); 
 			}
 			
 			free(current);
@@ -411,11 +413,11 @@ void removeDependent(Node **head, const char *contactName, const char *dependent
 						
 		if(strcmp(strlwr(tempNameToLowerCase), strlwr(contactName)) == 0 || strcmp(strlwr(tempLastNameToLowerCase), strlwr(contactName)) == 0){				
 			DependentNode *depCurrent =  current->contact.dependents;
-			DependentNode *prev = NULL;
-															
+			DependentNode *prev = NULL;	
+																		
 			while(depCurrent!=NULL){				
 				strncpy(tempDependentsToLowerCase, depCurrent->dependent.name, sizeof(tempDependentsToLowerCase) - 1);
-				tempDependentsToLowerCase[sizeof(tempDependentsToLowerCase) - 1] = '\0';
+				tempDependentsToLowerCase[sizeof(tempDependentsToLowerCase) - 1] = '\0';				
 				
 				if(strcmp(strlwr(tempDependentsToLowerCase), strlwr(dependentName))==0){
 					if(prev==NULL){
