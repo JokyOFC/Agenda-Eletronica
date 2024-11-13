@@ -529,7 +529,7 @@ void displayInclude(Node **head) {
                     printf("Nome: ");
                     scanf("%49s", nameDependent);
                     validMessage = insertValidate(2, 1, nameDependent);              
-	                if(validMessage == NULL){
+	                if(validMessage == 1){
 	                	notClean = 1;             	
 						break;
 	                }
