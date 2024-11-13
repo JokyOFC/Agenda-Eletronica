@@ -1,19 +1,19 @@
-#ifndef ENTITIE_H 	//Verificação da definição das Entidades
-#define ENTITIE_H	//Definindo dados e tipagem para as entidade se ainda não foi definido
+#ifndef ENTITIE_H 	
+#define ENTITIE_H	
 
-//Definição de estrutura dos dependentes
+
 typedef struct { 
   char name[50];
   int age;
 } Dependent;
 
-//Definição do No da estrutura dos dependentes
+
 typedef struct DependentNode {
   Dependent dependent;
   struct DependentNode *next;
 } DependentNode;
 
-//Definição dos contatos
+
 typedef struct {
   char id[10];
   char name[50];
@@ -26,7 +26,7 @@ typedef struct {
   DependentNode *dependents;
 } Contact;
 
-//Definição do No da testrutura dos contatos
+
 typedef struct Node {
   Contact contact;
   struct Node *next;

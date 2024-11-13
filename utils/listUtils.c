@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,8 +18,7 @@ Node **linkedListToArray(Node *head, int *size) {
     current = head;
     int i;
     for(i = 0; i < count; i++) {
-        array[i] = current;
-        //printf("Name at index %d: %s\n", i, array[i].name); // Check what is being copied
+        array[i] = current;       
         current = current->next;
     }
     return array;
@@ -34,7 +32,7 @@ int binarySearch(Node **array, int size, const char *name) {
   char tempLastNameToLowerCase[45];
   char nameToLowerCase[45];
 
-  // Converte `name` para minúsculas para comparação case-insensitive
+
   strncpy(nameToLowerCase, name, sizeof(nameToLowerCase) - 1);
   nameToLowerCase[sizeof(nameToLowerCase) - 1] = '\0';
   strlwr(nameToLowerCase);
@@ -42,12 +40,12 @@ int binarySearch(Node **array, int size, const char *name) {
   while (left <= right) {
     int mid = left + (right - left) / 2;
 
-    // Converte `contact.name` para minúsculas
+   
     strncpy(tempNameToLowerCase, array[mid]->contact.name, sizeof(tempNameToLowerCase) - 1);
     tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
     strlwr(tempNameToLowerCase);
 
-    // Converte `contact.lastName` para minúsculas
+   
     strncpy(tempLastNameToLowerCase, array[mid]->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
     tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0';
     strlwr(tempLastNameToLowerCase);
@@ -55,14 +53,14 @@ int binarySearch(Node **array, int size, const char *name) {
     int cmpName = strcmp(tempNameToLowerCase, nameToLowerCase);
     int cmpLastName = strcmp(tempLastNameToLowerCase, nameToLowerCase);
 
-    // Debugging opcional
+    
     printf("Left: %d, Right: %d, Mid: %d\n", left, right, mid);
     printf("Name at MID: %s, LastName at MID: %s\n", array[mid]->contact.name, array[mid]->contact.lastName);
     printf("CMP Name: %d, CMP LastName: %d\n", cmpName, cmpLastName);
 
-    // Verifica se `name` corresponde ao `contact.name` ou ao `contact.lastName`
+    
     if (cmpName == 0 || cmpLastName == 0) {
-      return mid; // Contato encontrado
+      return mid; 
     } else if (cmpName < 0 && cmpLastName < 0) {
       left = mid + 1;
     } else {
@@ -70,7 +68,7 @@ int binarySearch(Node **array, int size, const char *name) {
     }
   }
 
-  return -1; // Contato não encontrado
+  return -1;
 }
 
 

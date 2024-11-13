@@ -108,7 +108,7 @@ void displayReports(Node *head) {
                 notClean = 1;
             break;
             case '2':                
-                // Chamar função para Buscar Contatos de um Bairro em Específico
+                
                 clearScreen();
                 printf("Insira o bairro que deseja buscar:\n");
 
@@ -125,7 +125,7 @@ void displayReports(Node *head) {
                 notClean = 1;
             break;
             case '3':
-                // Chamar função para Buscar Contato em Específico e Seus Dependentes
+                
                 clearScreen();
                 
                 printf("Insira o nome do contato que deseja buscar:\n");
@@ -144,13 +144,13 @@ void displayReports(Node *head) {
                 notClean = 1;                    
             break;
             case '4':
-            	// Chamar função para Listar Dependentes Menores de 18 Anos
+            	
             	clearScreen();
                 getAllDependentsByAgeAndContactName(head);
                 notClean = 1;                
             break;
             case '0':
-                return;  // Volta para o menu anterior
+                return; 
             default:
                 clearScreen();
                 printf("Opção inválida. Tente novamente.\n");
@@ -423,7 +423,7 @@ void displayEditDependent(Node *head) {
     printf("\nO que deseja editar?\n1. Nome\n2. Idade\nEscolha: ");
     scanf("%d", &editChoice);
     if (editChoice == 1) {
-        // Editar o nome
+     
         printf("Digite o novo nome do dependente: ");
         dynamicStringInput = stringCreateInput();
         
@@ -434,7 +434,7 @@ void displayEditDependent(Node *head) {
         }
         free(dynamicStringInput);
     } else if (editChoice == 2) {
-        // Editar a idade
+       
         printf("Digite a nova idade do dependente: ");
         if (scanf("%d", &newAge) == 1 && newAge > 0) {
             editDependent(current, NULL, newAge);
@@ -515,7 +515,7 @@ void displayInclude(Node **head) {
         switch (option) {
             case '1':
                 clearScreen();
-                // Adicionar Contato
+                
                 printf("Insira as informações do novo contato: \n");
                 char id[10];
                 char name[50];
@@ -587,7 +587,7 @@ void displayInclude(Node **head) {
                 int haveDependents = 0;
                 char nameDependent[50];
                 int ageDependent = 0;
-                //gera um número aleatório entre 1 e 1000 para colocar no id
+                
                 snprintf(id, sizeof(id), "%03d", rand() % 1000); 
                 clearScreen();
                 Node *newContact = createContact(id, name, lastName, age, taxNumber, neighborhood, email, phone);
@@ -620,10 +620,10 @@ void displayInclude(Node **head) {
                 notClean = 1;
                 break;
             case '2':
-                // Adicionar Dependente
+                
                 clearScreen();
                 printf("Para qual contato deseja incluir dependente? \n");
-                // char contactName[50];
+                
 
                 char *dynamicStringInput = stringCreateInput();
                 Node * contactFound = searchContactAndReturn(head, dynamicStringInput);

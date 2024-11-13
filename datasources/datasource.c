@@ -6,7 +6,6 @@
 #include <string.h>
 
 
-//Arquivo de escreve e as funções e as definem
 void getContacts(Node *head) {
   Node *current = head;
 

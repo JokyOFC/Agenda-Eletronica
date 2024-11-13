@@ -4,33 +4,33 @@
 
 #include "../entities/entitie.h"
 
-//Função da Estrutura de ordenação Bubble Sort
+
 void bubbleSort(Node **head) {
   if (*head == NULL) {
-    return; // Retorna se a lista estiver vazia
+    return; 
   }
 
-  int hasSwapped;              // Indica se houve trocas na passagem
-  Node *currentNode;           // Ponteiro para percorrer a lista
-  Node *lastSortedNode = NULL; // Marca a última posição ordenada
+  int hasSwapped;             
+  Node *currentNode;           
+  Node *lastSortedNode = NULL; 
 
   do {
-    hasSwapped = 0;      // Reinicia a flag de troca
-    currentNode = *head; // Começa do início da lista
+    hasSwapped = 0;      
+    currentNode = *head; 
 
     while (currentNode->next != lastSortedNode) {
-      // Compara os nomes dos contatos
+     
       if (strcmp(currentNode->contact.name, currentNode->next->contact.name) >
           0) {
-        // Troca os contatos se necessário
+        
         Contact tempContact = currentNode->contact;
         currentNode->contact = currentNode->next->contact;
         currentNode->next->contact = tempContact;
-        hasSwapped = 1; // Indica que uma troca ocorreu
+        hasSwapped = 1; 
       }
-      currentNode = currentNode->next; // Move para o próximo contato
+      currentNode = currentNode->next; 
     }
-    lastSortedNode = currentNode; // Atualiza a última posição ordenada
-  } while (hasSwapped);           // Repete se houve trocas
+    lastSortedNode = currentNode; 
+  } while (hasSwapped);           
 }
 

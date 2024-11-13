@@ -1,7 +1,7 @@
-#ifndef MENU_H 	//Verificando definição de cabeçalho
-#define MENU_H	//Se não for definido, passa a definir
+#ifndef MENU_H 	
+#define MENU_H	
 
-#include "../entities/entitie.h" 	//Inclui o arquivo de cabeçalho
+#include "../entities/entitie.h" 
 
 void displayMenu(Node *head);
 void displayReports(Node *head);
@@ -11,5 +11,5 @@ void displayEdit(Node *head);
 void displayEditContact(Node *head);
 void displayEditDependent(Node *head);
 
-#endif	//Finalizar o processo de inclusão do cabeçalho
+#endif
 

@@ -4,20 +4,20 @@
 #include <stdio.h>
 #include <locale.h>
 
-#ifdef _WIN32  // Apenas para Windows - Caracteres UTF8
+#ifdef _WIN32  
     #include <windows.h>
 #endif
 
 
 int main(){
-	//Definindo idioma da aplicação para utilização de acentuação
+	
 	setlocale(LC_ALL, "Portuguese");
 
 	Node *contact_list = NULL;
 	
-	createMockContacts(&contact_list); 	//Cria a lista de contatos em Entidades
-	createMockContactWithDependent(&contact_list); //Cria a lista dos dependentes dos contatos em Entidades
-	displayMenu(contact_list);	//Chama o Menu (Inicio) do programa
+	createMockContacts(&contact_list);
+	createMockContactWithDependent(&contact_list); 
+	displayMenu(contact_list);
 		
-	return 0; //Retorno de compilação sucesso do programa
+	return 0; 
 }

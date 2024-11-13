@@ -20,7 +20,7 @@ int *insertValidate(int option, int type, char input[]){
 	char *emailValidPoint = NULL;
 	
 	if(type == 1){		
-		//Nome		
+			
 		if(lengthInput < 1){
 			message = "Nome obrigatório!";
 		}else if(lengthInput < 2){
@@ -31,7 +31,7 @@ int *insertValidate(int option, int type, char input[]){
 			}
 		}			
 	}else if(type == 2){
-		//CPF
+		
     	if(lengthInput < 1){
 			message = "CPF obrigatório!";
 		}else if(lengthInput != 11){
@@ -39,14 +39,14 @@ int *insertValidate(int option, int type, char input[]){
 		}
 			
 	}else if(type == 3){
-		//Número de Telefone    		
+				
     	if(lengthInput < 1){
 			message = "Telefone obrigatório!";
 		}else if(lengthInput < 10 || lengthInput > 11){
 			message = "Número de telefone inválido! Informe o DDD sem o zero. Caso seja celular informe o dígito adicional.";			
 		}
 	}else if(type == 4){
-		//Email	
+		
 		if(lengthInput < 1){
 			message = "Email obrigatório!";
 		}else{
@@ -57,7 +57,7 @@ int *insertValidate(int option, int type, char input[]){
 		}		
     		
 	}else if(type == 5){
-    	//Vizinho    		
+    	  		
     	if(lengthInput < 1){
 			message = "Bairro obrigatório!";
 		}else if(lengthInput < 4){
