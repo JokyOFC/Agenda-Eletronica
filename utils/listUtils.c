@@ -29,12 +29,24 @@ Node **linkedListToArray(Node *head, int *size) {
 int binarySearch(Node **array, int size, const char *name) {
   int left = 0;
   int right = size - 1;
+  
+  char tempNameToLowerCase[45];
+  char tempLastNameToLowerCase[45];  
 
   //printf("Starting binary search for: %s\n", name);
 
   while (left <= right) {
+  	
+  	strncpy(tempNameToLowerCase, array[mid]->contact.name, sizeof(tempNameToLowerCase) - 1);
+	tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
+	
+	//strncpy(tempLastNameToLowerCase, array[mid]->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
+	//tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0'; 
+		
     int mid = left + (right - left) / 2;
-    int cmp = strcmp(array[mid]->contact.name, name); // Access member using .
+    int cmp = strcmp(strlwr(array[mid]->contact.name), name); // Access member using .
+    int cmpName = cmp
+	int cmpLastName = strcmp(strlwr(array[mid]->contact.lastName), name);
     int i =0;
     
     // Print statements for debugging (optional)
@@ -44,7 +56,7 @@ int binarySearch(Node **array, int size, const char *name) {
     //printf("CMP: %d\n", cmp);
     //printf("Name at MID: %s\n", array[mid]->contact.name);  // Print full name for debugging
 
-    if (cmp == 0) {
+    if (cmpName == 0 || cmpLastName == 0) {
       return mid; // Contact found
     } else if (cmp < 0) {
       left = mid + 1;
