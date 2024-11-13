@@ -256,10 +256,16 @@ void editContact(Node *head, const char *newName,
 
 }
 
-void editDependent(){
-     
-     
-     
+void editDependent(DependentNode *dependent, const char *newName, int newAge) {
+    if (newName != NULL && strlen(newName) > 0) {
+        strcpy(dependent->dependent.name, newName);  
+        printf("Nome do dependente editado com sucesso.\n");
+    }
+
+    if (newAge > 0) {
+        dependent->dependent.age = newAge;
+        printf("Idade do dependente editada com sucesso.\n");
+    }
 }
 
 void addDependent(Contact *contact, const char *name, int age) {

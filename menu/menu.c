@@ -200,9 +200,24 @@ void displayEdit(Node *head) {
                 notClean = 1;
            break;
            case '2':
+                clearScreen();
+                printf("Digite o nome do contato que possui o dependente que deseja editar: \n");
+
+                dynamicStringInput = stringCreateInput();
                 
+                array = linkedListToArray(head, &size);
                 
+                index = binarySearch(array, size, dynamicStringInput);
                 
+                if (index != -1) {
+                    displayEditDependent(array[index]);
+                } else {
+                    printf("Contato nao encontrado.\n");
+                }
+                
+                free(dynamicStringInput);
+                free(array);
+                notClean = 1;
            break;
            case '0':
                 return;
@@ -376,6 +391,69 @@ void displayEditContact(Node *head){
        free(secondOption);
      
 }
+
+void displayEditDependent(Node *head) {
+    int dependentIndex, editChoice;
+    char *dynamicStringInput = NULL;
+    int newAge;
+    
+    DependentNode *current = head->contact.dependents;
+
+    if (current == NULL) {
+        printf("Este contato não tem dependentes.\n");
+        return;
+    }
+
+    printf("\n------ Dependentes ------\n");
+
+    int i = 1;
+    DependentNode *start = current;  
+    do {
+        printf("%d. %s\n", i, current->dependent.name);
+        current = current->next;
+        i++;
+    } while (current != start); 
+
+    printf("\nEscolha o número do dependente que deseja editar: ");
+    scanf("%d", &dependentIndex);
+
+    if (dependentIndex < 1 || dependentIndex >= i) {
+        printf("Índice inválido.\n");
+        return;
+    }
+
+    current = head->contact.dependents;
+    for (i = 1; i < dependentIndex; i++) {
+        current = current->next;
+    }
+
+    printf("\nO que deseja editar?\n1. Nome\n2. Idade\nEscolha: ");
+    scanf("%d", &editChoice);
+    if (editChoice == 1) {
+        // Editar o nome
+        printf("Digite o novo nome do dependente: ");
+        dynamicStringInput = stringCreateInput();
+        
+        if (dynamicStringInput != NULL && strlen(dynamicStringInput) > 0) {
+            editDependent(current, dynamicStringInput, -1);
+        } else {
+            printf("Nome inválido.\n");
+        }
+        free(dynamicStringInput);
+    } else if (editChoice == 2) {
+        // Editar a idade
+        printf("Digite a nova idade do dependente: ");
+        if (scanf("%d", &newAge) == 1 && newAge > 0) {
+            editDependent(current, NULL, newAge);
+        } else {
+            printf("Idade inválida.\n");
+        }
+    } else {
+        printf("Opção inválida.\n");
+    }
+}
+
+
 
 void displayRemove(Node *head) {
     char option;
