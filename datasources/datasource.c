@@ -6,7 +6,7 @@
 #include <string.h>
 
 
-//Arquivo de escreve e as funï¿½ï¿½es e as definem
+//Arquivo de escreve e as funções e as definem
 void getContacts(Node *head) {
   Node *current = head;
 
@@ -72,10 +72,15 @@ void getContacByNeighborhood(Node *head, char neighborhood[]) {
   Node *current = head;
   int foundContact = 0;
   
+  char tempNeighborhood[50]; 
+  
   printf("\n------Contato(s) no bairro: %s------\n", neighborhood);
   	
   while (current != NULL) {
-    if (strcmp(strlwr(current->contact.neighborhood), strlwr(neighborhood)) == 0) {
+  	strncpy(tempNeighborhood, current->contact.neighborhood, sizeof(tempNeighborhood) - 1);
+    tempNeighborhood[sizeof(tempNeighborhood) - 1] = '\0';
+    
+    if (strcmp(strlwr(tempNeighborhood), strlwr(neighborhood)) == 0) {
       printf("ID: %s\n", current->contact.id);
       printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
       printf("Age: %d\n", current->contact.age);
@@ -116,42 +121,48 @@ void getContactsByName(Node *head, char name[]) {
 
   while (current !=NULL) {
     
-    char fullName[100];
-      strcpy(fullName, current->contact.name);
-      strcat(fullName, " ");
-      strcat(fullName, current->contact.lastName);
+	char fullName[100];
+    strcpy(fullName, current->contact.name);
+    strcat(fullName, " ");
+    strcat(fullName, current->contact.lastName);
       
-    if (strcmp(strlwr(current->contact.name), strlwr(name)) == 0 || 
-         strcmp(strlwr(fullName), strlwr(name)) == 0) {
+    strncpy(tempNameToLowerCase, current->contact.name, sizeof(tempNameToLowerCase) - 1);
+	tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
+	
+	strncpy(tempLastNameToLowerCase, current->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
+	tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0';           
+      
+    if (strcmp(strlwr(tempNameToLowerCase), strlwr(name)) == 0 || 
+		strcmp(strlwr(tempLastNameToLowerCase), strlwr(name)) == 0 || 
+        strcmp(strlwr(fullName), strlwr(name)) == 0) {
                                   
-      printf("ID: %s\n", current->contact.id);
-      printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
-      printf("Age: %d\n", current->contact.age);
-      printf("Tax Number: %s\n", current->contact.taxNumber);
-      printf("Neighborhood: %s\n", current->contact.neighborhood);
-      printf("Email: %s\n", current->contact.email);
-      printf("Phone: %s\n", current->contact.phone);
+    	printf("ID: %s\n", current->contact.id);
+      	printf("Name: %s %s\n", current->contact.name, current->contact.lastName);
+      	printf("Age: %d\n", current->contact.age);
+      	printf("Tax Number: %s\n", current->contact.taxNumber);
+      	printf("Neighborhood: %s\n", current->contact.neighborhood);
+      	printf("Email: %s\n", current->contact.email);
+      	printf("Phone: %s\n", current->contact.phone);
 
-      if (current->contact.dependents != NULL) {
-      printf("Dependentes:\n");
-      DependentNode *depCurrent = current->contact.dependents;
-      do {
-	    printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name,
-	           depCurrent->dependent.age);
-	    depCurrent = depCurrent->next;
-	  } while (depCurrent != current->contact.dependents);
-      } else {
-        printf("Nenhum dependente cadastrado.\n");
-      }
+      	if (current->contact.dependents != NULL) {
+      		printf("Dependentes:\n");
+      		DependentNode *depCurrent = current->contact.dependents;
+      	do {
+	    	printf("\t- Nome: %s, Idade: %d\n", depCurrent->dependent.name, depCurrent->dependent.age);
+	    	depCurrent = depCurrent->next;
+	  	} while (depCurrent != current->contact.dependents);
+      	} else {
+        	printf("Nenhum dependente cadastrado.\n");
+      	}
 
-      printf("----------------------------\n");
-      foundContact = 1;
+      	printf("----------------------------\n");
+      	foundContact = 1;
     }
       current = current->next;
   }
 
   if(!foundContact) {
-    printf("\nEsse contato nï¿½o existe.\n");
+    printf("\nEsse contato não existe.\n");
     printf("----------------------------\n");
     return 0;
   }
@@ -210,46 +221,33 @@ void editContact(Node *head, const char *newName,
                  const char *newNeighborhood, const char *newEmail,
                  const char *newPhone) {
       
-      if(newName != NULL && newName != ""){
-      
-         strcpy(head->contact.name, newName);  
-           
+      if(newName != NULL && newName != ""){      
+         strcpy(head->contact.name, newName);             
       }
       
-      if(newLastName != NULL && newLastName != ""){
-      
-         strcpy(head->contact.lastName, newLastName);
-           
+      if(newLastName != NULL && newLastName != ""){      
+         strcpy(head->contact.lastName, newLastName);           
       }
       
-      if(newAge != NULL && newAge != 0) {
-      
-         head->contact.age = newAge;
-         
+      if(newAge != NULL && newAge != 0) {      
+         head->contact.age = newAge;         
       }
       
-      if(newTaxNumber != NULL && newTaxNumber != ""){
-      
-         strcpy(head->contact.taxNumber, newTaxNumber);  
-           
+      if(newTaxNumber != NULL && newTaxNumber != ""){      
+         strcpy(head->contact.taxNumber, newTaxNumber);             
       }
       
-      if(newNeighborhood != NULL && newNeighborhood != ""){
-           
-         strcpy(head->contact.neighborhood, newNeighborhood);  
-      
+      if(newNeighborhood != NULL && newNeighborhood != ""){           
+         strcpy(head->contact.neighborhood, newNeighborhood);        
       }
       
-      if(newEmail != NULL && newEmail != ""){
-      
+      if(newEmail != NULL && newEmail != ""){      
          strcpy(head->contact.email, newEmail);
            
       }
       
-      if(newPhone != NULL && newPhone != ""){
-      
-         strcpy(head->contact.phone, newPhone);
-           
+      if(newPhone != NULL && newPhone != ""){      
+         strcpy(head->contact.phone, newPhone);           
       }
       
       printf("Contato editado com sucesso.\n");
@@ -320,7 +318,7 @@ void insertContact(Node **head, Node *new_contact) {
   int isExists = 0;
   while (current != NULL){
     if (strcmp(current->contact.name, new_contact->contact.name) == 0 && strcmp(current->contact.lastName, new_contact->contact.lastName)  == 0) {
-      printf("Jï¿½ existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
+      printf("Já existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
       isExists = 1;
     }
     current = current->next;
@@ -341,12 +339,20 @@ void removeContact(Node **head, const char *contactName){
 	Node *current = *head;
 	Node *prev = NULL;
 	
+	char tempNameToLowerCase[45];
+	char tempLastNameToLowerCase[45];	
+	
 	while (current != NULL){
 		
-		if(strcmp(current->contact.name, contactName) == 0){
-		
-			if(prev==NULL){
-			
+		strncpy(tempNameToLowerCase, current->contact.name, sizeof(tempNameToLowerCase) - 1);
+		tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
+	
+		strncpy(tempLastNameToLowerCase, current->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
+		tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0';		
+				
+		if(strcmp(strlwr(tempNameToLowerCase), strlwr(contactName)) == 0 || strcmp(strlwr(tempLastNameToLowerCase), strlwr(contactName)) == 0){
+					
+			if(prev==NULL){			
 				*head = current->next;
 			} else {
 				prev->next = current->next;
@@ -370,37 +376,51 @@ void removeContact(Node **head, const char *contactName){
 		
 	}
 	
-	printf("Contato '%s' nï¿½o encontrado. \n", contactName);
+	printf("Contato '%s' não encontrado. \n", contactName);
 }
 
 void removeDependent(Node **head, const char *contactName, const char *dependentName){
 	Node *current  = *head;
+	
+	char tempNameToLowerCase[45];
+	char tempLastNameToLowerCase[45];
+	char tempDependentsToLowerCase[45];
+	
 	while(current !=NULL){
 		
-		if(strcmp(current->contact.name,contactName)==0){
+		strncpy(tempNameToLowerCase, current->contact.name, sizeof(tempNameToLowerCase) - 1);
+		tempNameToLowerCase[sizeof(tempNameToLowerCase) - 1] = '\0';
+	
+		strncpy(tempLastNameToLowerCase, current->contact.lastName, sizeof(tempLastNameToLowerCase) - 1);
+		tempLastNameToLowerCase[sizeof(tempLastNameToLowerCase) - 1] = '\0';  
+						
+		if(strcmp(strlwr(tempNameToLowerCase), strlwr(contactName)) == 0 || strcmp(strlwr(tempLastNameToLowerCase), strlwr(contactName)) == 0){				
 			DependentNode *depCurrent =  current->contact.dependents;
 			DependentNode *prev = NULL;
-			
-			while(depCurrent!=NULL){
-				if(strcmp(depCurrent->dependent.name, dependentName)==0){
+															
+			while(depCurrent!=NULL){				
+				strncpy(tempDependentsToLowerCase, depCurrent->dependent.name, sizeof(tempDependentsToLowerCase) - 1);
+				tempDependentsToLowerCase[sizeof(tempDependentsToLowerCase) - 1] = '\0';
+				
+				if(strcmp(strlwr(tempDependentsToLowerCase), strlwr(dependentName))==0){
 					if(prev==NULL){
 						current->contact.dependents = depCurrent->next;
 					} else {
 						prev->next = depCurrent->next;
 					}
 					free(depCurrent);
-					printf("Dependente '%s' removido do contato '%s' com sucesso. \n",dependentName, contactName);
+					printf("Dependente '%s' removido do contato '%s' com sucesso. \n", dependentName, contactName);
 					return;
 				}
 				prev = depCurrent;
 				depCurrent = depCurrent->next;
 			}
-			printf("Dependente '%s' nï¿½o encontrado para o contato '%s'. \n", dependentName, contactName);
+			printf("Dependente '%s' não encontrado para o contato '%s'. \n", dependentName, contactName);
 			return;
 		}
 		current = current->next;
 	}
-	printf("Contato '%s' nï¿½o encontrado. \n", contactName);
+	printf("Contato '%s' não encontrado. \n", contactName);
 }
 
 
@@ -424,10 +444,10 @@ void createMockContacts(Node **head) {
 
 void createMockContactWithDependent(Node **head) {
   Node *contact =
-      createContact("4", "Bob", "Builder", 50, "32165498700", "Hometown",
+      createContact("9", "Bob", "Builder", 50, "32165498700", "Hometown",
                     "bob.builder@example.com", "71982659845");
   Node *contact2 =
-      createContact("4", "Renan", "Batista", 80, "32165498700", "Hometown",
+      createContact("7", "Renan", "Batista", 80, "32165498700", "Hometown",
                     "bob.builder@example.com", "71982659845");
   addDependent(&contact->contact, "Alice", 35);
   addDependent(&contact->contact, "Tom", 18);
@@ -458,7 +478,7 @@ void saveContactsToFile(Node *head) {
     fprintf(file, "ID: %s\n", current->contact.id);
     fprintf(file, "Nome: %s %s\n", current->contact.name, current->contact.lastName);
     fprintf(file, "Idade: %d\n", current->contact.age);
-    fprintf(file, "Nï¿½mero de Contribuinte: %s\n", current->contact.taxNumber);
+    fprintf(file, "Número de Contribuinte: %s\n", current->contact.taxNumber);
     fprintf(file, "Bairro: %s\n", current->contact.neighborhood);
     fprintf(file, "Email: %s\n", current->contact.email);
     fprintf(file, "Telefone: %s\n", current->contact.phone);
