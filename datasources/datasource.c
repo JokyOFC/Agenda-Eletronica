@@ -161,7 +161,7 @@ void getContactsByName(Node *head, char name[]) {
   }
 
   if(!foundContact) {
-    printf("\nEsse contato não existe.\n");
+    printf("\nEsse contato nÃ£o existe.\n");
     printf("----------------------------\n");
     return 0;
   }
@@ -330,7 +330,7 @@ void insertContact(Node **head, Node *new_contact) {
   int isExists = 0;
   while (current != NULL){
     if (strcmp(current->contact.name, new_contact->contact.name) == 0 && strcmp(current->contact.lastName, new_contact->contact.lastName)  == 0) {
-      printf("Já existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
+      printf("JÃ¡ existe um contato com esse nome: %s %s \n\n", new_contact->contact.name, new_contact->contact.lastName);
       isExists = 1;
     }
     current = current->next;
@@ -392,7 +392,7 @@ void removeContact(Node **head, const char *contactName){
 		
 	}
 	
-	printf("Contato '%s' não encontrado. \n", contactName);
+	printf("Contato '%s' nÃ£o encontrado. \n", contactName);
 }
 
 void removeDependent(Node **head, const char *contactName, const char *dependentName){
@@ -431,17 +431,17 @@ void removeDependent(Node **head, const char *contactName, const char *dependent
 				prev = depCurrent;
 				depCurrent = depCurrent->next;
 			}
-			printf("Dependente '%s' não encontrado para o contato '%s'. \n", dependentName, contactName);
+			printf("Dependente '%s' nÃ£o encontrado para o contato '%s'. \n", dependentName, contactName);
 			return;
 		}
 		current = current->next;
 	}
-	printf("Contato '%s' não encontrado. \n", contactName);
+	printf("Contato '%s' nÃ£o encontrado. \n", contactName);
 }
 
 
 void createMockContacts(Node **head) {
-  insertContact(head, createContact("3", "Alice", "Johnsonnn", 42, "45678912300",
+  insertContact(head, createContact("3", "Luana", "Johnsonnn", 42, "45678912300",
                                     "Midtown", "alice.johnson@example.com",
                                     "71982659845"));
   insertContact(head,
@@ -463,7 +463,7 @@ void createMockContactWithDependent(Node **head) {
       createContact("9", "Bob", "Builder", 50, "32165498700", "Hometown",
                     "bob.builder@example.com", "71982659845");
   Node *contact2 =
-      createContact("7", "Renan", "Batista", 80, "32165498700", "Hometown",
+      createContact("7", "Renan", "Diego", 80, "32165498700", "Hometown",
                     "bob.builder@example.com", "71982659845");
   addDependent(&contact->contact, "Alice", 35);
   addDependent(&contact->contact, "Tom", 18);
@@ -494,7 +494,7 @@ void saveContactsToFile(Node *head) {
     fprintf(file, "ID: %s\n", current->contact.id);
     fprintf(file, "Nome: %s %s\n", current->contact.name, current->contact.lastName);
     fprintf(file, "Idade: %d\n", current->contact.age);
-    fprintf(file, "Número de Contribuinte: %s\n", current->contact.taxNumber);
+    fprintf(file, "NÃºmero de Contribuinte: %s\n", current->contact.taxNumber);
     fprintf(file, "Bairro: %s\n", current->contact.neighborhood);
     fprintf(file, "Email: %s\n", current->contact.email);
     fprintf(file, "Telefone: %s\n", current->contact.phone);
